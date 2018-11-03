@@ -1,0 +1,5 @@
+C:\Dev\Projects\COP-4710-Semester-Project\Trunk\Website\Contracts\bin\Debug\Contracts.dll
+C:\Dev\Projects\COP-4710-Semester-Project\Trunk\Website\Contracts\bin\Debug\Contracts.pdb
+C:\Dev\Projects\COP-4710-Semester-Project\Trunk\Website\Contracts\obj\Debug\Contracts.csprojResolveAssemblyReference.cache
+C:\Dev\Projects\COP-4710-Semester-Project\Trunk\Website\Contracts\obj\Debug\Contracts.dll
+C:\Dev\Projects\COP-4710-Semester-Project\Trunk\Website\Contracts\obj\Debug\Contracts.pdb

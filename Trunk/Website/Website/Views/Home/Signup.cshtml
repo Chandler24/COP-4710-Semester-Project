@@ -1,0 +1,58 @@
+﻿@model Website.Models.SignupModel
+
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+
+    @using (Html.BeginForm("SubmitRegistration", "Home"))
+    {
+        <div style="text-align:center;">
+            <div class="form-group">
+                <h1> Sign up </h1>
+            </div>
+            <div class="form-group">
+                <label>First Name:</label>
+                @Html.TextBoxFor(m => m.FirstName, new { @placeholder = "John" }) *
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                @Html.TextBoxFor(m => m.LastName, new { @placeholder = "Smith" }) *
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+            <div class="form-group">
+                <label>Username: </label>
+                @Html.TextBoxFor(m => m.Username, new { @placeholder = "johnsmith@gmail.com" }) *
+                @Html.ValidationMessageFor(m => m.Username)
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                @Html.PasswordFor(m => m.Password, new { @placeholder = "********" }) *
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div class="form-group error">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Sign-up" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+</body>
+</html>   
