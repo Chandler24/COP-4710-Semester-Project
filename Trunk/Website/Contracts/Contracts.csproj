@@ -43,6 +43,7 @@
     <Compile Include="DataContracts\SignupRequest.cs" />
     <Compile Include="DataContracts\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RatingEnum.cs" />
     <Compile Include="ServiceContracts\IAccountConnection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
