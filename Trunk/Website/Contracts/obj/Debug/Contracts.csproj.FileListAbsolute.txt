@@ -3,3 +3,9 @@ C:\Dev\Projects\COP-4710-Semester-Project\Trunk\Website\Contracts\bin\Debug\Cont
 C:\Dev\Projects\COP-4710-Semester-Project\Trunk\Website\Contracts\obj\Debug\Contracts.csprojResolveAssemblyReference.cache
 C:\Dev\Projects\COP-4710-Semester-Project\Trunk\Website\Contracts\obj\Debug\Contracts.dll
 C:\Dev\Projects\COP-4710-Semester-Project\Trunk\Website\Contracts\obj\Debug\Contracts.pdb
+C:\Users\jesse alsing\Desktop\Database Systems\SemesterProject\COP-4710-Semester-Project\Trunk\Website\Contracts\bin\Debug\Contracts.dll
+C:\Users\jesse alsing\Desktop\Database Systems\SemesterProject\COP-4710-Semester-Project\Trunk\Website\Contracts\bin\Debug\Contracts.pdb
+C:\Users\jesse alsing\Desktop\Database Systems\SemesterProject\COP-4710-Semester-Project\Trunk\Website\Contracts\obj\Debug\Contracts.csprojResolveAssemblyReference.cache
+C:\Users\jesse alsing\Desktop\Database Systems\SemesterProject\COP-4710-Semester-Project\Trunk\Website\Contracts\obj\Debug\Contracts.csproj.CoreCompileInputs.cache
+C:\Users\jesse alsing\Desktop\Database Systems\SemesterProject\COP-4710-Semester-Project\Trunk\Website\Contracts\obj\Debug\Contracts.dll
+C:\Users\jesse alsing\Desktop\Database Systems\SemesterProject\COP-4710-Semester-Project\Trunk\Website\Contracts\obj\Debug\Contracts.pdb
