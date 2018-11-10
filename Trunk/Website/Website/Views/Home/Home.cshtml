@@ -145,38 +145,35 @@
         list-style: none;
     }
 
-    ul.rating {
-        background: url(images/star.jpg) bottom;
-        height: 21px;
-        width: 115px;
-        overflow: hidden;
+    .star {
+        color: goldenrod;
+        font-size: 2.0rem;
+        padding: 0 1rem; /* space out the stars */
     }
 
-    ul.rating li {
-        display: inline
-    }
-
-    .rating a {
-        display: block;
-        width: 23px;
-        height: 21px;
-        float: left;
-        text-indent: -9999px;
-        position: relative;
-    }
-
-        .rating a:hover {
-            background: url(images/star.jpg center;
-            width: 115px;
-            margin-left: -92px;
-            position: static;
+        .star::before {
+            content: '\2606'; /* star outline */
+            cursor: pointer;
         }
 
-        .rating a:active {
-            background-position: top;
+        .star.rated::before {
+            /* the style for a selected star */
+            content: '\2605'; /* filled star */
         }
 
+    .stars {
+        counter-reset: rateme 0;
+        font-size: 2.0rem;
+        font-weight: 900;
+    }
 
+    .star.rated {
+        counter-increment: rateme 1;
+    }
+
+    .stars::after {
+        content: counter(rateme) '/5';
+    }
 </style>
 </head>
 
@@ -219,31 +216,55 @@
                                 </p>
 
                                 <!-- Add the UI for rating in the corresponding case -->
-                                <ul class="rating">
+                                <div class="rating">
                                     @switch (@m.Rating)
                                     {
                                         case Contracts.RatingEnum.NotRated:
-                                            <li>Not yet rated</li>
+                                            <span class="star"></span>
+                                            <span class="star"></span>
+                                            <span class="star"></span>
+                                            <span class="star"></span>
+                                            <span class="star"></span>
                                             break;
                                         case Contracts.RatingEnum.OneStar:
-                                            <li>One Star</li>
+                                            <span class="star rated"></span>
+                                            <span class="star"></span>
+                                            <span class="star"></span>
+                                            <span class="star"></span>
+                                            <span class="star"></span>
                                             break;
                                         case Contracts.RatingEnum.TwoStars:
-                                            <li>Two Stars</li>
+                                            <span class="star rated"></span>
+                                            <span class="star rated"></span>
+                                            <span class="star"></span>
+                                            <span class="star"></span>
+                                            <span class="star"></span>
                                             break;
                                         case Contracts.RatingEnum.ThreeStars:
-                                            <li>Three Stars</li>
+                                            <span class="star rated"></span>
+                                            <span class="star rated"></span>
+                                            <span class="star rated"></span>
+                                            <span class="star"></span>
+                                            <span class="star"></span>
                                             break;
                                         case Contracts.RatingEnum.FourStars:
-                                            <li>Four Stars</li>
+                                            <span class="star rated"></span>
+                                            <span class="star rated"></span>
+                                            <span class="star rated"></span>
+                                            <span class="star rated"></span>
+                                            <span class="star"></span>
                                             break;
                                         case Contracts.RatingEnum.FiveStars:
-                                            <li>Five Stars</li>
+                                            <span class="star rated"></span>
+                                            <span class="star rated"></span>
+                                            <span class="star rated"></span>
+                                            <span class="star rated"></span>
+                                            <span class="star rated"></span>
                                             break;
                                         default:
                                             break;
                                     }
-                                </ul>
+                                </div>
                                 <br />
                                 <br />
                             }
@@ -274,6 +295,37 @@
                     myDropdown.classList.remove('show');
                 }
             }
+        }
+
+        //initial setup
+        document.addEventListener('DOMContentLoaded', function () {
+            let stars = document.querySelectorAll('.star');
+            stars.forEach(function (star) {
+                star.addEventListener('click', setRating);
+            });
+
+            let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
+            let target = stars[rating - 1];
+            target.dispatchEvent(new MouseEvent('click'));
+        });
+        function setRating(ev) {
+            let span = ev.currentTarget;
+            let stars = document.querySelectorAll('.star');
+            let match = false;
+            let num = 0;
+            stars.forEach(function (star, index) {
+                if (match) {
+                    star.classList.remove('rated');
+                } else {
+                    star.classList.add('rated');
+                }
+                //are we currently looking at the span that was clicked
+                if (star === span) {
+                    match = true;
+                    num = index + 1;
+                }
+            });
+            document.querySelector('.stars').setAttribute('data-rating', num);
         }
     </script>        
     </body>
