@@ -4,15 +4,249 @@
 }
 
 <!DOCTYPE html>
+<html lang="en">
 
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>LandingPage</title>
+    <title>Events Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+    .navbar {
+        overflow: hidden;
+        background-color: #333;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+        .navbar a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 16px 32px;
+            text-decoration: none;
+        }
+
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
+
+        .dropdown .dropbtn {
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+            background-color: red;
+        }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+    .show {
+        display: block;
+    }
+    .tab-content {
+        margin: 50px 0 20px 0;
+    }
+
+    .media > .pull-left {
+        margin-right: 29px;
+    }
+
+    .media .dateEl {
+        display: inline-block;
+        text-align: center;
+        background: #f9f9f9;
+        padding: 18px 0 25px 0;
+        color: #173d51;
+        font-size: 16px;
+        font-weight: 700;
+        width: 113px;
+        text-transform: uppercase;
+    }
+
+        .media .dateEl em {
+            display: block;
+            color: #662d91;
+            font-size: 42px;
+            line-height: 1;
+            margin-bottom: 5px;
+            font-style: normal;
+        }
+
+    .media .media-heading a {
+        color: #022235;
+        font-size: 21px;
+        text-transform: uppercase;
+    }
+
+    .media .meta-data {
+        margin: 0 0 7px 0;
+    }
+
+    .media .longDate, .media .timeEl {
+        display: inline-block;
+        font-size: 14px;
+        line-height: 14px;
+        font-family: 'PT Sans Narrow', sans-serif;
+        font-weight: 700;
+        color: #636465;
+        text-transform: uppercase;
+        min-height: 16px;
+    }
+
+    .media .longDate {
+        background: transparent url(../images/ico-calendar.png) no-repeat left top;
+        padding: 0 10px 0 24px;
+        border-right: 1px solid #eb5b4c;
+        margin-right: 3px;
+    }
+
+    #tab1.tab-pane .media .longDate {
+        border-right: none;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    ul.rating {
+        background: url(images/star.jpg) bottom;
+        height: 21px;
+        width: 115px;
+        overflow: hidden;
+    }
+
+    ul.rating li {
+        display: inline
+    }
+
+    .rating a {
+        display: block;
+        width: 23px;
+        height: 21px;
+        float: left;
+        text-indent: -9999px;
+        position: relative;
+    }
+
+        .rating a:hover {
+            background: url(images/star.jpg center;
+            width: 115px;
+            margin-left: -92px;
+            position: static;
+        }
+
+        .rating a:active {
+            background-position: top;
+        }
+
+
+</style>
 </head>
+
 <body>
-    <div> 
-        Welcome to the application
+
+    <div class="navbar">
+        <a href="~/Controllers/HomeController.cs"> Home </a>
+        <a href="#news">Add Event</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">
+                Dropdown
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
     </div>
+
+    <script>
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (e) {
+            if (!e.target.matches('.dropbtn')) {
+                var myDropdown = document.getElementById("myDropdown");
+                if (myDropdown.classList.contains('show')) {
+                    myDropdown.classList.remove('show');
+                }
+            }
+        }
+    </script>
+
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="tab1">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="media">
+                        <a class="pull-left" href="#"><span class="dateEl"><em>30</em>Nov</span></a>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                <a href="#">Venture Tech</a>
+                            </h4>
+                            <div class="meta-data">
+                                <span class="longDate">Nov 30, 2016</span> <span class="timeEl">12:00pm - 02:00pm</span>
+                            </div>
+                            <p>
+                                See the latest inspirations in the local tech scene.
+                            </p>
+
+                            <ul class="rating">
+
+                                <li><a href="#" title="1 Star">1</a></li>
+
+                                <li><a href="#" title="2 Stars">2</a></li>
+
+                                <li><a href="#" title="3 Stars">3</a></li>
+
+                                <li><a href="#" title="4 Stars">4</a></li>
+
+                                <li><a href="#" title="5 Stars">5</a></li>
+
+                            </ul>
+
+                        </div><!-- / media-body -->
+                    </div><!-- / media -->
 </body>
 </html>
