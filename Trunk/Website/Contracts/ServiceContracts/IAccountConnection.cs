@@ -8,6 +8,8 @@ namespace Contracts
 {
     public interface IAccountConnection
     {
+        List<UserType> GetUserTypes();
+
         void AddUser(SignupRequest request);
     }
 }

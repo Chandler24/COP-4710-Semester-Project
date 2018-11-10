@@ -47,5 +47,45 @@ namespace DatabaseConnection
                 }
             }
         }
+
+        public List<UserType> GetUserTypes()
+        {
+            List<UserType> userTypes = new List<UserType>();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "GetUserTypes";
+                command.Connection = connection;
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            UserType usertype = new UserType();
+                            usertype.Id = reader.GetInt32(0);
+                            usertype.Description = reader.GetString(1);
+                            userTypes.Add(usertype);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return userTypes;
+        }
     }
 }

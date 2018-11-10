@@ -63,5 +63,15 @@
   <ItemGroup>
     <Build Include="Tables\Users.sql" />
     <Build Include="Stored Procedures\AddUser.sql" />
+    <Build Include="Tables\UserTypes.sql" />
+    <Build Include="Tables\Events.sql" />
+    <Build Include="Tables\EventType.sql" />
+    <Build Include="Tables\EventCategory.sql" />
+    <Build Include="Tables\Locations.sql" />
+    <Build Include="Tables\Universities.sql" />
+    <Build Include="Tables\EventSocial.sql" />
+    <Build Include="Tables\RegisteredStudentOrganizations.sql" />
+    <Build Include="Tables\RSO_Members.sql" />
+    <Build Include="Stored Procedures\GetUserTypes.sql" />
   </ItemGroup>
 </Project>
