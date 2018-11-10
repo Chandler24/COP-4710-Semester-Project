@@ -87,5 +87,48 @@ namespace DatabaseConnection
 
             return userTypes;
         }
+
+        public bool SignIn(SignInRequest request)
+        {
+            bool result = false;
+            SqlParameter[] sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@Username", request.Username),
+            };
+
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "SignIn";
+                command.Connection = connection;
+                command.Parameters.AddRange(sqlParams);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            string password = reader.GetString(0);
+                            if (password == request.Password)
+                                result = true;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result = false;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return result;
+        }
     }
 }

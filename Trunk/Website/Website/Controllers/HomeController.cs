@@ -19,39 +19,32 @@ namespace Website.Controllers
 
         public ActionResult Login(LoginModel model)
         {
-            string actionName = "Login";
+            string viewName = "Index";
             if (ModelState.IsValid)
             {
                 // Check the user's credentials against the database
-                actionName = "Home";
+                AccountConnection accountConnection = new AccountConnection();
+                SignInRequest request = new SignInRequest()
+                {
+                    Username = model.Username,
+                    Password = model.Password
+                };
+                bool result = accountConnection.SignIn(request);
+                if (result == true)
+                    viewName = "Home";
             }
 
-            return RedirectToAction(actionName);
+            return RedirectToAction(viewName);
         }
 
         public ActionResult Home()
         {
             HomeModel model = new HomeModel();
             model.Events = new List<EventModel>();
-
-            EventModel eventOne = new EventModel();
-            eventOne.Date = DateTime.Now.AddDays(2);
-            eventOne.Rating = RatingEnum.FiveStars;
-            eventOne.Name = "Testing Event 1";
-            eventOne.Month = "Nov";
-            eventOne.Description = "Test Event 1 Description";
-
-            EventModel eventTwo = new EventModel();
-            eventTwo.Date = DateTime.Now.AddDays(10);
-            eventTwo.Rating = RatingEnum.FiveStars;
-            eventTwo.Name = "Testing Event 2";
-            eventTwo.Month = "Nov";
-            eventTwo.Description = "Test Event 2 Description";
-
-            model.Events.Add(eventOne);
-            model.Events.Add(eventTwo);
-
-            return View("LandingPage", model);
+            EventConnection eventConnection = new EventConnection();
+            List<Events> events = eventConnection.GetEvents();
+            model.Events = ConvertEvents(events);
+            return View(model);
         }
 
         public ActionResult Signup()
@@ -87,6 +80,25 @@ namespace Website.Controllers
                 Username = input.Username
             };
 
+            return output;
+        }
+
+        private List<EventModel> ConvertEvents(List<Events> input)
+        {
+            List<EventModel> output = new List<EventModel>();
+            foreach(Events e in input)
+            {
+                EventModel m = new EventModel
+                {
+                    Date = e.Date,
+                    Description = e.Description,
+                    Month = e.Month,
+                    Name = e.Name,
+                    Rating = e.Rating
+                };
+
+                output.Add(m);
+            }
             return output;
         }
     }
