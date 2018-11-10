@@ -19,26 +19,47 @@ namespace Website.Controllers
 
         public ActionResult Login(LoginModel model)
         {
-            string viewName = "Login";
-
+            string actionName = "Login";
             if (ModelState.IsValid)
             {
                 // Check the user's credentials against the database
-
-                viewName = "LandingPage";
+                actionName = "Home";
             }
 
-            return View(viewName);
+            return RedirectToAction(actionName);
         }
 
-        public ActionResult LandingPage()
+        public ActionResult Home()
         {
-            return View();
+            HomeModel model = new HomeModel();
+            model.Events = new List<EventModel>();
+
+            EventModel eventOne = new EventModel();
+            eventOne.Date = DateTime.Now.AddDays(2);
+            eventOne.Rating = RatingEnum.FiveStars;
+            eventOne.Name = "Testing Event 1";
+            eventOne.Month = "Nov";
+            eventOne.Description = "Test Event 1 Description";
+
+            EventModel eventTwo = new EventModel();
+            eventTwo.Date = DateTime.Now.AddDays(10);
+            eventTwo.Rating = RatingEnum.FiveStars;
+            eventTwo.Name = "Testing Event 2";
+            eventTwo.Month = "Nov";
+            eventTwo.Description = "Test Event 2 Description";
+
+            model.Events.Add(eventOne);
+            model.Events.Add(eventTwo);
+
+            return View("LandingPage", model);
         }
 
         public ActionResult Signup()
         {
-            return View();
+            SignupModel model = new SignupModel();
+            AccountConnection accountConnection = new AccountConnection();
+            model.UserTypes = accountConnection.GetUserTypes();
+            return View(model);
         }
 
         public ActionResult SubmitRegistration(SignupModel model)

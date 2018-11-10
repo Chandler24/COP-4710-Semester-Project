@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Contracts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Website.Models
 {
@@ -19,5 +21,7 @@ namespace Website.Models
 
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
+
+        public List<UserType> UserTypes { get; set; }
     }
 }
