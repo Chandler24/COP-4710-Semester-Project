@@ -17,6 +17,13 @@ namespace Website.Controllers
             return View("Login");
         }
 
+        public ActionResult CreateEvent()
+        {
+            ViewBag.Title = "Create Event";
+            return View();
+        }
+
+
         public ActionResult Login(LoginModel model)
         {
             string viewName = "Index";
