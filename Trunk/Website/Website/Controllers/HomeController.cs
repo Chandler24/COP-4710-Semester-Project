@@ -23,6 +23,17 @@ namespace Website.Controllers
             return View();
         }
 
+        public ActionResult CreateUniversity()
+        {
+            ViewBag.Title = "Create University";
+            return View();
+        }
+
+        public ActionResult CreateRSO()
+        {
+            ViewBag.Title = "Create RSO";
+            return View();
+        }
 
         public ActionResult Login(LoginModel model)
         {
