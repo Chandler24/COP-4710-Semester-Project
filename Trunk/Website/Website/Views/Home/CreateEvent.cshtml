@@ -1,0 +1,140 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>CreateEvent</title>
+
+    <style>
+         /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+         #map {
+             height: 100%;
+         }
+         /* Optional: Makes the sample page fill the window. */
+         html, body {
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
+    </style>
+</head>
+<body>
+    <div>
+        <form>
+            Event Name: <input type="text" name="Event Name" />
+            <br>
+            Event Category: <input type="text" name="Event Category" />
+            <br>
+            <label for="Description">Description:</label>
+            <textarea rows="5" cols="50" name="Description"
+                      id="Description"></textarea>
+            <br />
+            Contact Phone: <input type="tel" name="Contact Phone" />
+            <br>
+            Contact Email: <input type="text" name="Contact Email" />
+            <br />
+            Start Time: <input type="time" name="Start Time" />
+            <br>
+            End Time: <input type="time" name="End Time" />
+            <br>
+            Event Date: <input type="date" name="Event Date" />
+            <br />
+            <input type="submit" name="submit" value="Submit" />
+
+        </form>
+    </div>
+    <div id="map" height="460px" width="100%"></div>
+    <div id="form">
+        <table>
+            <tr><td></td><td><input type='button' value='Save' onclick='saveData()' /></td></tr>
+        </table>
+    </div>
+
+
+    <script>
+        var map;
+        var marker;
+        var infowindow;
+        var messagewindow;
+
+        function initMap() {
+            var florida = { lat: 28.6024, lng: -81.2001 };
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: florida,
+                zoom: 12
+            });
+
+            infowindow = new google.maps.InfoWindow({
+                content: document.getElementById('form')
+            });
+
+            messagewindow = new google.maps.InfoWindow({
+                content: document.getElementById('message')
+            });
+
+            google.maps.event.addListener(map, 'click', function (event) {
+                marker = new google.maps.Marker({
+                    position: event.latLng,
+                    map: map
+                });
+
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+            });
+        }
+
+        function saveData() {
+            var name = escape(document.getElementById('name').value);
+
+            var latlng = marker.getPosition();
+            var url = '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
+
+            downloadUrl(url, function (data, responseCode) {
+
+                if (responseCode == 200 && data.length <= 1) {
+                    infowindow.close();
+                    messagewindow.open(map, marker);
+                }
+            });
+        }
+
+        function downloadUrl(url, callback) {
+            var request = window.ActiveXObject ?
+                new ActiveXObject('Microsoft.XMLHTTP') :
+                new XMLHttpRequest;
+
+            request.onreadystatechange = function () {
+                if (request.readyState == 4) {
+                    request.onreadystatechange = doNothing;
+                    callback(request.responseText, request.status);
+                }
+            };
+
+            request.open('GET', url, true);
+            request.send(null);
+        }
+
+        function doNothing() {
+        }
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1rCahYMg_sbFtaUZbTz4a6rFTRdF-oXc&callback=initMap">
+    </script>
+</body>
+
+</html>
