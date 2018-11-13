@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Website.Models.CreateEventModel
+
+@{
     Layout = null;
 }
 
@@ -33,36 +35,84 @@
 </head>
 <body>
     <div>
-        <form>
-            Event Name: <input type="text" name="Event Name" />
-            <br>
+    @using (Html.BeginForm("AddEvent", "Home"))
+    {
+        <div class="form-group" style="margin-left:10px">
+            <div class="control-group">
+                @Html.LabelFor(m => m.Name)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Name)
+                </div>
+            </div>
             <br />
-            <label for="University"> Select Your Host University:</label>
-            <select name="University" id="University">
-                <option value="UCF">UCF</option>
-            </select>
+            <div class="control-group">
+                @Html.LabelFor(m => m.EventTypes)
+                <div class="controls">
+                    @Html.DropDownListFor(m => m.SelectedEventType, new SelectList(Model.EventTypes, "Id", "Name"), "-- Select Event Type --")
+                </div>
+            </div>
             <br />
-            Event Category: <input type="text" name="Event Category" />
-            <br>
-            <label for="Description">Description:</label>
-            <textarea rows="5" cols="50" name="Description"
-                      id="Description"></textarea>
+            <div class="control-group">
+                @Html.LabelFor(m => m.Universities)
+                <div class="controls">
+                    @Html.DropDownListFor(m => m.SelectedUniversity, new SelectList(Model.Universities, "Id", "Name"), "-- Select University --")
+                </div>
+            </div>
             <br />
-            Contact Phone: <input type="tel" name="Contact Phone" />
+            <div class="control-group">
+                @Html.LabelFor(m => m.EventCategories)
+                <div class="controls">
+                    @Html.DropDownListFor(m => m.SelectedCategory, new SelectList(Model.EventCategories, "Id", "Name"), "-- Select Event Category --")
+                </div>
+            </div>
             <br>
-            Contact Email: <input type="text" name="Contact Email" />
+            <div class="control-group">
+                @Html.LabelFor(m => m.Description)
+                <div class="controls">
+                    @Html.TextAreaFor(m => m.Description, new { @rows = "5", cols = "50" })
+                </div>
+            </div>
             <br />
-            Start Time: <input type="time" name="Start Time" />
+            <div class="control-group">
+                @Html.LabelFor(m => m.ContactPhone)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.ContactPhone)
+                </div>
+            </div>
             <br>
-            End Time: <input type="time" name="End Time" />
+            <div class="control-group">
+                @Html.LabelFor(m => m.ContactEmail)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.ContactEmail)
+                </div>
+            </div>
+            <br />
+            <div class="control-group">
+                @Html.LabelFor(m => m.StartTime)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.StartTime, new { @type = "time" })
+                </div>
+            </div>
             <br>
-            Event Date: <input type="date" name="Event Date" />
+            <div class="control-group">
+                @Html.LabelFor(m => m.EndTime)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.EndTime, new { @type = "time" })
+                </div>
+            </div>
+            <br>
+            <div class="control-group">
+                @Html.LabelFor(m => m.Date)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Date, new { @type = "date" })
+                </div>
+            </div>
             <br />
             <input type="submit" name="submit" value="Submit" />
-
-        </form>
+        </div>
+    }
     </div>
-    <div id="map" height="460px" width="100%"></div>
+    <div id="map" height="460px" width="400px"></div>
     <div id="form">
         <table>
             <tr><td></td><td><input type='button' value='Save' onclick='saveData()' /></td></tr>

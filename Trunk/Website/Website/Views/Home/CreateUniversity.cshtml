@@ -1,14 +1,14 @@
-﻿
+﻿@model Website.Models.UniversityModel
+
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>CreateUniversity</title>
+    <title>Create University</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,72 +19,68 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div>
-        <form>
-            Event Name: <input type="text" name="Event Name" />
-            <br>
-            Event Category: <input type="text" name="Event Category" />
-            <br>
-            <label for="Description">Description:</label>
-            <textarea rows="5" cols="50" name="Description"
-                      id="Description"></textarea>
-            <br />
-            University Name: <input type="text" name="University Name" />
-            <br>
-            <!-- address-line1 input-->
-            <div class="control-group">
-                <label class="control-label">Address Line 1</label>
-                <div class="controls">
-                    <input id="address-line1" name="address-line1" type="text" placeholder="address line 1"
-                           class="input-xlarge">
-                    <p class="help-block">Street address, P.O. box, company name, c/o</p>
-                </div>
+    @using (Html.BeginForm("AddUniversity", "Home"))
+    {
+        <div class="control-group">
+            @Html.LabelFor(m => m.Name)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Name)
             </div>
-            <!-- address-line2 input-->
-            <div class="control-group">
-                <label class="control-label">Address Line 2</label>
-                <div class="controls">
-                    <input id="address-line2" name="address-line2" type="text" placeholder="address line 2"
-                           class="input-xlarge">
-                    <p class="help-block">Apartment, suite , unit, building, floor, etc.</p>
-                </div>
+        </div>
+        <br>
+        <div class="control-group">
+             @Html.LabelFor(m => m.PrimaryAddress)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.PrimaryAddress, new { @name = "address-line1", @placeholder = "123 SW Knights Way", @class = "input-xlarge" })
+                <p class="help-block">Street address, P.O. box, company name, c/o</p>
             </div>
-            <!-- city input-->
-            <div class="control-group">
-                <label class="control-label">City / Town</label>
-                <div class="controls">
-                    <input id="city" name="city" type="text" placeholder="city" class="input-xlarge">
-                    <p class="help-block"></p>
-                </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.SecondaryAddress)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.SecondaryAddress, new { @name = "address-line2", @placeholder = "Building 16 Apartment 24601", @class = "input-xlarge" })
+                <p class="help-block">Apartment, suite , unit, building, floor, etc.</p>
             </div>
-            <!-- region input-->
-            <div class="control-group">
-                <label class="control-label">State / Province / Region</label>
-                <div class="controls">
-                    <input id="region" name="region" type="text" placeholder="state / province / region"
-                           class="input-xlarge">
-                    <p class="help-block"></p>
-                </div>
+        </div>
+        <!-- city input-->
+        <div class="control-group">
+            @Html.LabelFor(m => m.City)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.City, new { @name = "city", @placeholder = "Orlando", @class = "input-xlarge" })
+                <p class="help-block"></p>
             </div>
-            <!-- postal-code input-->
-            <div class="control-group">
-                <label class="control-label">Zip / Postal Code</label>
-                <div class="controls">
-                    <input id="postal-code" name="postal-code" type="text" placeholder="zip or postal code"
-                           class="input-xlarge">
-                    <p class="help-block"></p>
-                </div>
+        </div>
+        <!-- region input-->
+        <div class="control-group">
+            @Html.LabelFor(m => m.State)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.State, new { @name = "state", @placeholder = "Florida", @class = "input-xlarge" })
+                <p class="help-block"></p>
             </div>
-            <br />
-            Number of Students: <input type="number" name="Number of Students" />
-            <br />
-            <label for="Description">Description:</label>
-            <textarea rows="5" cols="50" name="Description"
-                      id="Description"></textarea>
-            <br />
-            <input type="submit" name="submit" value="Submit" />
-
-        </form>
-    </div>
+        </div>
+        <!-- postal-code input-->
+        <div class="control-group">
+            @Html.LabelFor(m => m.Zip)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Zip, new { @name = "state", @placeholder = "32825", @class = "input-xlarge" })
+                <p class="help-block"></p>
+            </div>
+        </div>
+        <br />
+        <div class="control-group">
+            @Html.LabelFor(m => m.NumberOfStudents)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.NumberOfStudents)
+            </div>
+        </div>
+        <br />
+        <div class="control-group">
+            @Html.LabelFor(m => m.Description)
+            <div class="controls">
+                @Html.TextAreaFor(m => m.Description, new { @rows = "5", @cols = "50" })
+            </div>
+        </div>
+        <input type="submit" name="submit" value="Submit" />
+    }
 </body>
 </html>

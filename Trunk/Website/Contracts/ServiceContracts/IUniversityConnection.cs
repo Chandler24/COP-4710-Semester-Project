@@ -9,5 +9,7 @@ namespace Contracts
     public interface IUniversityConnection
     {
         void AddUniversity(SaveUniversityRequest request);
+
+        List<UniversityResponse> GetAllUniversities();
     }
 }

@@ -20,7 +20,21 @@ namespace Website.Controllers
         public ActionResult CreateEvent()
         {
             ViewBag.Title = "Create Event";
-            return View();
+
+            CreateEventModel model = new CreateEventModel();
+
+            UniversityConnection conn = new UniversityConnection();
+            EventConnection econn = new EventConnection();
+
+            List<UniversityResponse> response1 = conn.GetAllUniversities();
+            List<EventCategoryResponse> response2 = econn.GetEventCategories();
+            List<EventTypeResponse> response3 = econn.GetEventTypes();
+
+            model.Universities = ConvertUniversityResponse(response1);
+            model.EventCategories = ConvertEventCategoryResponse(response2);
+            model.EventTypes = ConvertEventTypeResponse(response3);
+
+            return View(model);
         }
 
         public ActionResult CreateUniversity()
@@ -32,7 +46,11 @@ namespace Website.Controllers
         public ActionResult CreateRSO()
         {
             ViewBag.Title = "Create RSO";
-            return View();
+            CreateRsoModel model = new CreateRsoModel();
+            UniversityConnection conn = new UniversityConnection();
+            List<UniversityResponse> uni = conn.GetAllUniversities();
+            model.Universities = ConvertUniversityResponse(uni);
+            return View(model);
         }
 
         public ActionResult Login(LoginModel model)
@@ -47,9 +65,13 @@ namespace Website.Controllers
                     Username = model.Username,
                     Password = model.Password
                 };
-                bool result = accountConnection.SignIn(request);
-                if (result == true)
+                int userId = accountConnection.SignIn(request);
+                if (userId != -1)
+                {
+                    // Redirect the user to home and store the user id as a session variable. Helps for account tracking.
                     viewName = "Home";
+                    Session["UserId"] = userId;
+                }
             }
 
             return RedirectToAction(viewName);
@@ -62,29 +84,6 @@ namespace Website.Controllers
             EventConnection eventConnection = new EventConnection();
             List<Events> events = eventConnection.GetEvents();
             model.Events = ConvertEvents(events);
-            if(model.Events.Count == 0)
-            {
-                EventModel e = new EventModel()
-                {
-                    Date = DateTime.Now,
-                    Month = "Nov",
-                    Description = "Test event 1",
-                    Name = "Event 1",
-                    Rating = RatingEnum.ThreeStars
-
-                };
-                EventModel e2 = new EventModel()
-                {
-                    Date = DateTime.Now,
-                    Month = "Dec",
-                    Description = "Test event 2",
-                    Name = "Event 2",
-                    Rating = RatingEnum.FiveStars
-
-                };
-                model.Events.Add(e);
-                model.Events.Add(e2);
-            }
             return View(model);
         }
 
@@ -111,6 +110,35 @@ namespace Website.Controllers
             return View(viewName);
         }
 
+        public ActionResult AddUniversity(UniversityModel model)
+        {
+            UniversityConnection connection = new UniversityConnection();
+            SaveUniversityRequest request = new SaveUniversityRequest()
+            {
+                City = model.City,
+                Description = model.Description,
+                Name = model.Name,
+                NumberOfStudents = model.NumberOfStudents,
+                PrimaryAddress = model.PrimaryAddress,
+                SecondaryAddress = model.SecondaryAddress,
+                State = model.State,
+                Zip = model.Zip
+            };
+
+            connection.AddUniversity(request);
+            return View();
+        }
+
+        public ActionResult AddEvent(CreateEventModel model)
+        {
+            SaveEventRequest request = PrepareSaveEventRequest(model);
+            EventConnection conn = new EventConnection();
+            conn.SaveEvent(request);
+
+            return RedirectToAction("Home");
+        }
+
+        // Private conversion methods
         private SignupRequest ConvertSignUpModel(SignupModel input)
         {
             SignupRequest output = new SignupRequest()
@@ -140,6 +168,80 @@ namespace Website.Controllers
 
                 output.Add(m);
             }
+            return output;
+        }
+
+        private List<University> ConvertUniversityResponse(List<UniversityResponse> input)
+        {
+            List<University> output = new List<University>();
+
+            foreach (UniversityResponse u in input)
+            {
+                University uni = new University()
+                {
+                    Id = u.Id,
+                    Name = u.Name
+                };
+                output.Add(uni);
+            }
+
+            return output;
+        }
+
+        private List<EventCategory> ConvertEventCategoryResponse(List<EventCategoryResponse> input)
+        {
+            List<EventCategory> output = new List<EventCategory>();
+
+            foreach (EventCategoryResponse e in input)
+            {
+                EventCategory eve = new EventCategory()
+                {
+                    Id = e.Id,
+                    Name = e.Description
+                };
+                output.Add(eve);
+            }
+
+            return output;
+        }
+
+        private SaveEventRequest PrepareSaveEventRequest(CreateEventModel model)
+        {
+            string date = model.Date + " " + model.StartTime;
+            int userId = Convert.ToInt32(Session["UserId"]);
+
+            SaveEventRequest request = new SaveEventRequest()
+            {
+                Category = model.SelectedCategory,
+                ContactEmail = model.ContactEmail,
+                ContactPhone = model.ContactPhone,
+                Date = date,
+                Description = model.Description,
+                EventAdmin = userId,
+                HostUniversity = model.SelectedUniversity,
+                Location = 1,
+                Name = model.Name,
+                Type = model.SelectedEventType
+            };
+
+            return request;
+        }
+
+        private List<EventType> ConvertEventTypeResponse(List<EventTypeResponse> input)
+        {
+            List<EventType> output = new List<EventType>();
+
+            foreach (EventTypeResponse e in input)
+            {
+                EventType type = new EventType()
+                {
+                    Id = e.Id,
+                    Name = e.Name
+                };
+
+                output.Add(type);
+            }
+
             return output;
         }
     }

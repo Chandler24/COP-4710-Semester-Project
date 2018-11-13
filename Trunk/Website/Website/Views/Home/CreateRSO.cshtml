@@ -1,4 +1,5 @@
-﻿
+﻿@model Website.Models.CreateRsoModel
+
 @{
     Layout = null;
 }
@@ -24,40 +25,70 @@
     <div>
         <form>
             <br />
-            RSO Name: <input type="text" name="RSO Name" />
+            <div class="control-group">
+                @Html.LabelFor(m => m.Name)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Name)
+                </div>
+            </div>
             <br>
             <p>Please select your university from one of the following below</p>
-
             <br />
-
-            <label for="University"> Select Your Host University:</label>
-            <select name="University" id="University">
-                <option value="UCF">UCF</option>
-            </select>
+            <div class="control-group">
+                @Html.LabelFor(m => m.Universities)
+                <div class="controls">
+                    @Html.DropDownListFor(m => m.SelectedUniversity, new SelectList(Model.Universities, "Id", "Name"), "-- Select University --")
+                </div>
+            </div>
             <br>
-            <label for="Description"> RSO Description:</label>
-            <textarea rows="5" cols="50" name="Description"
-                      id="Description"></textarea>
+            <div class="control-group">
+                @Html.LabelFor(m => m.Description)
+                <div class="controls">
+                    @Html.TextAreaFor(m => m.Description, new { @rows = "5", @cols = "50" })
+                </div>
+            </div>
             <br />
-            <br>
-            RSO Admin: <input type="text" name="Contact Email" />
-            <br />
-            <br />
+            <br>           
             <p>Submit below the emails of five other people you would like to join the RSO</p>
             <br>
-            RSO member #1: <input type="text" name="Contact Email" />
+            <div class="control-group">
+                @Html.LabelFor(m => m.Member1)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Member1, new { @rows = "5", @cols = "50" })
+                </div>
+            </div>
             <br />
             <br>
-            RSO member #2: <input type="text" name="Contact Email" />
+            <div class="control-group">
+                @Html.LabelFor(m => m.Member2)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Member2, new { @rows = "5", @cols = "50" })
+                </div>
+            </div>
             <br />
             <br>
-            RSO member #3: <input type="text" name="Contact Email" />
+            <div class="control-group">
+                @Html.LabelFor(m => m.Member3)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Member3, new { @rows = "5", @cols = "50" })
+                </div>
+            </div>
             <br />
             <br>
-            RSO member #4: <input type="text" name="Contact Email" />
+            <div class="control-group">
+                @Html.LabelFor(m => m.Member4)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Member4, new { @rows = "5", @cols = "50" })
+                </div>
+            </div>
             <br />
             <br>
-            RSO member #5: <input type="text" name="Contact Email" />
+            <div class="control-group">
+                @Html.LabelFor(m => m.Member5)
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Member5, new { @rows = "5", @cols = "50" })
+                </div>
+            </div>
             <br />
 
             <br />

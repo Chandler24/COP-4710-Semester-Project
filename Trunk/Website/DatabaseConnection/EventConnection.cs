@@ -113,5 +113,112 @@ namespace DatabaseConnection
 
             return events;
         }
+
+        public List<EventCategoryResponse> GetEventCategories()
+        {
+            List<EventCategoryResponse> response = new List<EventCategoryResponse>();
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "GetEventCategories";
+                command.Connection = connection;
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            EventCategoryResponse e = new EventCategoryResponse()
+                            {
+                                Id = reader.GetInt32(0),
+                                Description = reader.GetString(1)
+                            };
+                          
+                            response.Add(e);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+
+            return response;
+        }
+
+        public void SaveEvent(SaveEventRequest request)
+        {
+            ConnectionHelper conn = new ConnectionHelper();
+
+            SqlParameter[] sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@Name", request.Name),
+                new SqlParameter("@Type", request.Type),
+                new SqlParameter("@Category", request.Category),
+                new SqlParameter("@Description", request.Description), 
+                new SqlParameter("@Date", request.Date),
+                new SqlParameter("@Location", request.Location),
+                new SqlParameter("@ContactPhone", request.ContactPhone),
+                new SqlParameter("@ContactEmail", request.ContactEmail),
+                new SqlParameter("@EventAdmin", request.EventAdmin),
+                new SqlParameter("@HostUniversity", request.HostUniversity)
+            };
+
+            conn.ExecuteNonQuery("SaveEvent", sqlParams);
+        }
+
+        public List<EventTypeResponse> GetEventTypes()
+        {
+            List<EventTypeResponse> response = new List<EventTypeResponse>();
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "GetEventTypes";
+                command.Connection = connection;
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            EventTypeResponse e = new EventTypeResponse()
+                            {
+                                Id = reader.GetInt32(0),
+                                Name = reader.GetString(1)
+                            };
+
+                            response.Add(e);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+
+            return response;
+        }
     }
 }
