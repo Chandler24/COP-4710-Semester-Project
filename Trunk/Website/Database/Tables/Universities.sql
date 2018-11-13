@@ -1,8 +1,12 @@
 ﻿CREATE TABLE [dbo].[Universities]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT IDENTITY(1, 1) NOT NULL PRIMARY KEY,
 	[Name] NVARCHAR(64) NOT NULL,
-	[Location] INT NOT NULL,
-	[Description] NVARCHAR(64) NOT NULL,
-	[NumberOfStudents] BIGINT NOT NULL
+	[Address1] NVARCHAR(128) NOT NULL,
+	[Address2] NVARCHAR(128),
+	[City] NVARCHAR(32) NOT NULL,
+	[State] NVARCHAR(16) NOT NULL,
+	[Zip] NVARCHAR(16) NOT NULL,
+	[Description] NVARCHAR(MAX) NOT NULL,
+	[NumberOfStudents] INT NOT NULL
 )

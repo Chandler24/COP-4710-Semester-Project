@@ -9,5 +9,11 @@ namespace Contracts
     public interface IEventConnection
     {
         List<Events> GetEvents();
+
+        List<EventCategoryResponse> GetEventCategories();
+
+        List<EventTypeResponse> GetEventTypes();
+
+        void SaveEvent(SaveEventRequest request);
     }
 }

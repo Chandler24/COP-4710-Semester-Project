@@ -11,5 +11,7 @@ namespace Contracts
         List<UserType> GetUserTypes();
 
         void AddUser(SignupRequest request);
+
+        int SignIn(SignInRequest request);
     }
 }

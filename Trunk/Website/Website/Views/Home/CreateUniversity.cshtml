@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿
 @{
     Layout = null;
@@ -55,3 +56,91 @@
     </div>
 </body>
 </html>
+=======
+﻿@model Website.Models.UniversityModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create University</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm("AddUniversity", "Home"))
+    {
+        <div class="control-group">
+            @Html.LabelFor(m => m.Name)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Name)
+            </div>
+        </div>
+        <br>
+        <div class="control-group">
+             @Html.LabelFor(m => m.PrimaryAddress)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.PrimaryAddress, new { @name = "address-line1", @placeholder = "123 SW Knights Way", @class = "input-xlarge" })
+                <p class="help-block">Street address, P.O. box, company name, c/o</p>
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(m => m.SecondaryAddress)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.SecondaryAddress, new { @name = "address-line2", @placeholder = "Building 16 Apartment 24601", @class = "input-xlarge" })
+                <p class="help-block">Apartment, suite , unit, building, floor, etc.</p>
+            </div>
+        </div>
+        <!-- city input-->
+        <div class="control-group">
+            @Html.LabelFor(m => m.City)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.City, new { @name = "city", @placeholder = "Orlando", @class = "input-xlarge" })
+                <p class="help-block"></p>
+            </div>
+        </div>
+        <!-- region input-->
+        <div class="control-group">
+            @Html.LabelFor(m => m.State)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.State, new { @name = "state", @placeholder = "Florida", @class = "input-xlarge" })
+                <p class="help-block"></p>
+            </div>
+        </div>
+        <!-- postal-code input-->
+        <div class="control-group">
+            @Html.LabelFor(m => m.Zip)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Zip, new { @name = "state", @placeholder = "32825", @class = "input-xlarge" })
+                <p class="help-block"></p>
+            </div>
+        </div>
+        <br />
+        <div class="control-group">
+            @Html.LabelFor(m => m.NumberOfStudents)
+            <div class="controls">
+                @Html.TextBoxFor(m => m.NumberOfStudents)
+            </div>
+        </div>
+        <br />
+        <div class="control-group">
+            @Html.LabelFor(m => m.Description)
+            <div class="controls">
+                @Html.TextAreaFor(m => m.Description, new { @rows = "5", @cols = "50" })
+            </div>
+        </div>
+        <input type="submit" name="submit" value="Submit" />
+    }
+</body>
+</html>
+>>>>>>> ef66ef4a6d9a70ad4c750d35ebc6daa6f3be1c72

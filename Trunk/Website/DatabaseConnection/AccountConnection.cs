@@ -14,6 +14,7 @@ namespace DatabaseConnection
     {
         public void AddUser(SignupRequest request)
         {
+            ConnectionHelper conn = new ConnectionHelper();
             SqlParameter[] sqlParams = new SqlParameter[]
             {
                 new SqlParameter("@FirstName", request.FirstName),
@@ -22,30 +23,7 @@ namespace DatabaseConnection
                 new SqlParameter("Password", request.Password)
             };
 
-
-            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand command = new SqlCommand();
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddRange(sqlParams);
-                command.CommandText = "AddUser";
-                command.Connection = connection;
-
-                try
-                {
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                }
-                catch(Exception ex)
-                {
-
-                }
-                finally
-                {
-                    connection.Close();
-                }
-            }
+            conn.ExecuteNonQuery("AddUser", sqlParams);
         }
 
         public List<UserType> GetUserTypes()
@@ -88,9 +66,9 @@ namespace DatabaseConnection
             return userTypes;
         }
 
-        public bool SignIn(SignInRequest request)
+        public int SignIn(SignInRequest request)
         {
-            bool result = false;
+            int userId = -1;
             SqlParameter[] sqlParams = new SqlParameter[]
             {
                 new SqlParameter("@Username", request.Username),
@@ -115,20 +93,20 @@ namespace DatabaseConnection
                         {
                             string password = reader.GetString(0);
                             if (password == request.Password)
-                                result = true;
+                                userId = reader.GetInt32(1);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    result = false;
+
                 }
                 finally
                 {
                     connection.Close();
                 }
             }
-            return result;
+            return userId;
         }
     }
 }

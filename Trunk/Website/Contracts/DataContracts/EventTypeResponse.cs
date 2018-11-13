@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Contracts
 {
-    public interface IUniversityConnection
+    public class EventTypeResponse
     {
-        void AddUniversity(SaveUniversityRequest request);
+        public int Id { get; set; }
 
-        List<UniversityResponse> GetAllUniversities();
+        public string Name { get; set; }
     }
 }

@@ -75,5 +75,10 @@
     <Build Include="Stored Procedures\GetUserTypes.sql" />
     <Build Include="Stored Procedures\GetEvents.sql" />
     <Build Include="Stored Procedures\SignIn.sql" />
+    <Build Include="Stored Procedures\AddUniversity.sql" />
+    <Build Include="Stored Procedures\GetAllUniversities.sql" />
+    <Build Include="Stored Procedures\GetEventCategories.sql" />
+    <Build Include="Stored Procedures\SaveEvent.sql" />
+    <Build Include="Stored Procedures\GetEventTypes.sql" />
   </ItemGroup>
 </Project>
