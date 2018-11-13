@@ -62,6 +62,29 @@ namespace Website.Controllers
             EventConnection eventConnection = new EventConnection();
             List<Events> events = eventConnection.GetEvents();
             model.Events = ConvertEvents(events);
+            if(model.Events.Count == 0)
+            {
+                EventModel e = new EventModel()
+                {
+                    Date = DateTime.Now,
+                    Month = "Nov",
+                    Description = "Test event 1",
+                    Name = "Event 1",
+                    Rating = RatingEnum.ThreeStars
+
+                };
+                EventModel e2 = new EventModel()
+                {
+                    Date = DateTime.Now,
+                    Month = "Dec",
+                    Description = "Test event 2",
+                    Name = "Event 2",
+                    Rating = RatingEnum.FiveStars
+
+                };
+                model.Events.Add(e);
+                model.Events.Add(e2);
+            }
             return View(model);
         }
 
