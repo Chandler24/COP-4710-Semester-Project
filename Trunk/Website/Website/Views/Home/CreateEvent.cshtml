@@ -10,64 +10,77 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/dropDownMenu.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/formLayout.css"/>
     <title>CreateEvent</title>
 
     <style>
-         /* Always set the map height explicitly to define the size of the div
-        * element that contains the map. */
-         #map {
-             height: 100%;
-         }
-         /* Optional: Makes the sample page fill the window. */
-         html, body {
-             height: 100%;
-             margin: 0;
-             padding: 0;
-         }
-       
     </style>
 </head>
-<body>
-    <div>
-        <form>
-            Event Name: <input type="text" name="Event Name" />
-            <br>
-            <br />
-            <label for="University"> Select Your Host University:</label>
-            <select name="University" id="University">
-                <option value="UCF">UCF</option>
-            </select>
-            <br />
-            Event Category: <input type="text" name="Event Category" />
-            <br>
-            <label for="Description">Description:</label>
-            <textarea rows="5" cols="50" name="Description"
-                      id="Description"></textarea>
-            <br />
-            Contact Phone: <input type="tel" name="Contact Phone" />
-            <br>
-            Contact Email: <input type="text" name="Contact Email" />
-            <br />
-            Start Time: <input type="time" name="Start Time" />
-            <br>
-            End Time: <input type="time" name="End Time" />
-            <br>
-            Event Date: <input type="date" name="Event Date" />
-            <br />
-            <input type="submit" name="submit" value="Submit" />
 
+<body>
+    <div class="navbar">
+        <a href="~/Home/Home"> Home </a>
+        <a href="~/Home/CreateEvent">Add Event</a>
+        <a href="~/Home/CreateRSO">Add RSO</a>
+        <a href="~/Home/CreateUniversity">Add University</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">
+                Select University
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-style-2">
+        <div class="form-style-2-heading">Provide the Event Information</div>
+        <form action="" method="post">
+            <label for="field1"><span> Admin Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
+            <label for="field2"><span>Admin Email <span class="required">*</span></span><input type="text" class="input-field" name="field2" value="" /></label>
+            <label><span>Admin Telephone</span><input type="text" class="tel-number-field" name="tel_no_1" value="" maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_2" value="" maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_3" value="" maxlength="10" /></label>
+            <label><span>Event Date and Time</span><input type="datetime-local" name="date and time" value="" /></label>
+
+            <label for="field4">
+                <span>Type of Event</span><select name="field4" class="select-field">
+                    <option value="RSO Event">RSO Event</option>
+                    <option value="Public Event">Public Event</option>
+                    <option value="Private Event">Private Event</option>
+                </select>
+            </label>
+            <label for="field5">
+                <span>Event Category</span> <select name="field5" class="select-field">
+                    <!-- Change these to dynamic-->
+                    <option value="RSO Event">RSO Event</option>
+                    <option value="Public Event">Public Event</option>
+                    <option value="Private Event">Private Event</option>
+                </select>
+            </label>
+            <label for="field6">
+                <span>Host University</span> <select name="field6" class="select-field">
+                    <!-- Change these to dynamic-->
+                    <option value="RSO Event">RSO Event</option>
+                    <option value="Public Event">Public Event</option>
+                    <option value="Private Event">Private Event</option>
+                </select>
+            </label>
+            <label for="field5"><span>Event Description <span class="required">*</span></span><textarea name="field5" class="textarea-field"></textarea></label>
+
+            <label><span> </span><input type="submit" value="Submit" /></label>
         </form>
     </div>
+
     <div id="map" height="460px" width="100%"></div>
-    <div id="form">
-        <table>
-            <tr><td></td><td><input type='button' value='Save' onclick='saveData()' /></td></tr>
-        </table>
-    </div>
+
 
 
     <script>

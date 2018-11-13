@@ -13,57 +13,62 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/dropDownMenu.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/formLayout.css"/>
 
- 
+
 </head>
 <body>
-    <div>
-        <form>
-            <br />
-            RSO Name: <input type="text" name="RSO Name" />
-            <br>
-            <p>Please select your university from one of the following below</p>
-
-            <br />
-
-            <label for="University"> Select Your Host University:</label>
-            <select name="University" id="University">
-                <option value="UCF">UCF</option>
-            </select>
-            <br>
-            <label for="Description"> RSO Description:</label>
-            <textarea rows="5" cols="50" name="Description"
-                      id="Description"></textarea>
-            <br />
-            <br>
-            RSO Admin: <input type="text" name="Contact Email" />
-            <br />
-            <br />
-            <p>Submit below the emails of five other people you would like to join the RSO</p>
-            <br>
-            RSO member #1: <input type="text" name="Contact Email" />
-            <br />
-            <br>
-            RSO member #2: <input type="text" name="Contact Email" />
-            <br />
-            <br>
-            RSO member #3: <input type="text" name="Contact Email" />
-            <br />
-            <br>
-            RSO member #4: <input type="text" name="Contact Email" />
-            <br />
-            <br>
-            RSO member #5: <input type="text" name="Contact Email" />
-            <br />
-
-            <br />
-            <input type="submit" name="submit" value="Submit" />
-        </form>
+    <div class="navbar">
+        <a href="~/Home/Home"> Home </a>
+        <a href="~/Home/CreateEvent">Add Event</a>
+        <a href="~/Home/CreateRSO">Add RSO</a>
+        <a href="~/Home/CreateUniversity">Add University</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">
+                Select University
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
     </div>
 
+    <div class="form-style-2">
+        <div class="form-style-2-heading">Provide the RSO Information</div>
+        <form action="" method="post">
+            <label for="field1"><span> RSO Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
+            <label for="field2"><span>RSO Admin Email <span class="required">*</span></span><input type="text" class="input-field" name="field2" value="" /></label>
+
+
+            <label for="field3">
+                <span> Select the Host University</span> <select name="field3" class="select-field">
+                    <!-- Change these to dynamic-->
+                    <option value="RSO Event">RSO Event</option>
+                    <option value="Public Event">Public Event</option>
+                    <option value="Private Event">Private Event</option>
+                </select>
+            </label>
+            <label for="field4"><span>Event Description <span class="required">*</span></span><textarea name="field4" class="textarea-field"></textarea></label>
+
+            <div class="form-style-2-heading">Provide five emails to invite members</div>
+            <label for="field5"><span>Member Email #1 <span class="required">*</span></span><input type="text" class="input-field" name="field5" value="" /></label>
+            <label for="field6"><span>Member Email #2 <span class="required">*</span></span><input type="text" class="input-field" name="field6" value="" /></label>
+            <label for="field7"><span>Member Email #3 <span class="required">*</span></span><input type="text" class="input-field" name="field7" value="" /></label>
+            <label for="field8"><span>Member Email #4 <span class="required">*</span></span><input type="text" class="input-field" name="field8" value="" /></label>
+            <label for="field9"><span>Member Email #5 <span class="required">*</span></span><input type="text" class="input-field" name="field9" value="" /></label>
+
+
+            <label><span> </span><input type="submit" value="Submit" /></label>
+        </form>
+    </div>
 </body>
 </html>

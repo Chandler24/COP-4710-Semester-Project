@@ -13,77 +13,44 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/dropDownMenu.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/formLayout.css" />
 </head>
 <body>
-    <div>
-        <form>
-            Event Name: <input type="text" name="Event Name" />
-            <br>
-            Event Category: <input type="text" name="Event Category" />
-            <br>
-            <label for="Description">Description:</label>
-            <textarea rows="5" cols="50" name="Description"
-                      id="Description"></textarea>
-            <br />
-            University Name: <input type="text" name="University Name" />
-            <br>
-            <!-- address-line1 input-->
-            <div class="control-group">
-                <label class="control-label">Address Line 1</label>
-                <div class="controls">
-                    <input id="address-line1" name="address-line1" type="text" placeholder="address line 1"
-                           class="input-xlarge">
-                    <p class="help-block">Street address, P.O. box, company name, c/o</p>
-                </div>
+    <div class="navbar">
+        <a href="~/Home/Home"> Home </a>
+        <a href="~/Home/CreateEvent">Add Event</a>
+        <a href="~/Home/CreateRSO">Add RSO</a>
+        <a href="~/Home/CreateUniversity">Add University</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">
+                Select University
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
             </div>
-            <!-- address-line2 input-->
-            <div class="control-group">
-                <label class="control-label">Address Line 2</label>
-                <div class="controls">
-                    <input id="address-line2" name="address-line2" type="text" placeholder="address line 2"
-                           class="input-xlarge">
-                    <p class="help-block">Apartment, suite , unit, building, floor, etc.</p>
-                </div>
-            </div>
-            <!-- city input-->
-            <div class="control-group">
-                <label class="control-label">City / Town</label>
-                <div class="controls">
-                    <input id="city" name="city" type="text" placeholder="city" class="input-xlarge">
-                    <p class="help-block"></p>
-                </div>
-            </div>
-            <!-- region input-->
-            <div class="control-group">
-                <label class="control-label">State / Province / Region</label>
-                <div class="controls">
-                    <input id="region" name="region" type="text" placeholder="state / province / region"
-                           class="input-xlarge">
-                    <p class="help-block"></p>
-                </div>
-            </div>
-            <!-- postal-code input-->
-            <div class="control-group">
-                <label class="control-label">Zip / Postal Code</label>
-                <div class="controls">
-                    <input id="postal-code" name="postal-code" type="text" placeholder="zip or postal code"
-                           class="input-xlarge">
-                    <p class="help-block"></p>
-                </div>
-            </div>
-            <br />
-            Number of Students: <input type="number" name="Number of Students" />
-            <br />
-            <label for="Description">Description:</label>
-            <textarea rows="5" cols="50" name="Description"
-                      id="Description"></textarea>
-            <br />
-            <input type="submit" name="submit" value="Submit" />
+        </div>
+    </div>
 
+    <div class="form-style-2">
+        <div class="form-style-2-heading">Provide the University Information</div>
+        <form action="" method="post">
+            <label for="field1"><span> University Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
+            <label><span>University Telephone</span><input type="text" class="tel-number-field" name="tel_no_1" value="" maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_2" value="" maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_3" value="" maxlength="10" /></label>
+            <label for="field2"><span> University Population <span class="required">*</span></span><input type="number" class="input-field" name="field2" value="" /></label>
+            <label for="field3"><span>RSO Description <span class="required">*</span></span><textarea name="field3" class="textarea-field"></textarea></label>
+            <label for="field4"><span> University Address <span class="required">*</span></span><input type="text" class="input-field" name="field4" value="" /></label>
+
+
+            <label><span> </span><input type="submit" value="Submit" /></label>
         </form>
     </div>
 </body>

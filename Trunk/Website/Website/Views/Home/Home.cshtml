@@ -15,202 +15,140 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/dropDownMenu.css">
 
-<style>
+    <style>
+        /*Event styling*/
 
-    .navbar {
-        overflow: hidden;
-        background-color: #333;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .navbar a {
-            float: left;
-            font-size: 16px;
-            color: white;
-            text-align: center;
-            padding: 16px 32px;
-            text-decoration: none;
+        .tab-content {
+            margin: 50px 0 20px 0;
         }
 
-    .dropdown {
-        float: left;
-        overflow: hidden;
-    }
-
-    .dropdown .dropbtn {
-            cursor: pointer;
-            font-size: 16px;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
+        .media > .pull-left {
+            margin-right: 29px;
         }
 
-    .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
-            background-color: red;
-        }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
-
-    .dropdown-content a {
-            float: none;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-
-    .dropdown-content a:hover {
-                background-color: #ddd;
-            }
-
-    .show {
-        display: block;
-    }
-
-    /*Event styling*/
-
-    .tab-content {
-        margin: 50px 0 20px 0;
-    }
-
-    .media > .pull-left {
-        margin-right: 29px;
-    }
-
-    .media .dateEl {
-        display: inline-block;
-        text-align: center;
-        background: #f9f9f9;
-        padding: 18px 0 25px 0;
-        color: #173d51;
-        font-size: 16px;
-        font-weight: 700;
-        width: 113px;
-        text-transform: uppercase;
-    }
-
-    .media .dateEl em {
-            display: block;
-            color: #662d91;
-            font-size: 42px;
-            line-height: 1;
-            margin-bottom: 5px;
-            font-style: normal;
-        }
-
-    .media .media-heading a {
-        color: #022235;
-        font-size: 21px;
-        text-transform: uppercase;
-    }
-
-    .media .meta-data {
-        margin: 0 0 7px 0;
-    }
-
-    .media .longDate, .media .timeEl {
-        display: inline-block;
-        font-size: 14px;
-        line-height: 14px;
-        font-family: 'PT Sans Narrow', sans-serif;
-        font-weight: 700;
-        color: #636465;
-        text-transform: uppercase;
-        min-height: 16px;
-    }
-
-    .media .longDate {
-        background: transparent url(../images/ico-calendar.png) no-repeat left top;
-        padding: 0 10px 0 24px;
-        border-right: 1px solid #eb5b4c;
-        margin-right: 3px;
-    }
-
-    #tab1.tab-pane .media .longDate {
-        border-right: none;
-    }
-
-    * {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-    }
-
-    /*Star Rating system*/
-    body {
-        padding: 1em;
-    }
-
-    input {
-        position: absolute;
-        top: -2em;
-        clip: rect(0,0,0,0);
-    }
-
-    .score {
-        unicode-bidi: bidi-override;
-        direction: rtl;
-        text-align: left;
-        border: 0;
-        font-size: 0;
-    }
-
-    .score legend {
-            overflow: hidden;
-            height: 0;
-        }
-
-    .score label {
-            font-size: 32px;
-            font-size: 2rem;
-            line-height: 32px;
-            line-height: 2rem;
+        .media .dateEl {
             display: inline-block;
-            position: relative;
             text-align: center;
-            width: 1.2em;
-            height: 1em;
-            overflow: hidden;
-            text-indent: 100%;
+            background: #f9f9f9;
+            padding: 18px 0 25px 0;
+            color: #173d51;
+            font-size: 16px;
+            font-weight: 700;
+            width: 113px;
+            text-transform: uppercase;
         }
 
-    .score label:before {
-                content: "☆";
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                text-indent: 0;
-                line-height: 1em;
-                color: #aaa;
+            .media .dateEl em {
+                display: block;
+                color: #662d91;
+                font-size: 42px;
+                line-height: 1;
+                margin-bottom: 5px;
+                font-style: normal;
             }
 
-    .score label:hover:before,
-    .score label:hover ~ label:before,
-    .score input:checked ~ label:before {
-                content: "★";
-                color: #ffbb04;
+        .media .media-heading a {
+            color: #022235;
+            font-size: 21px;
+            text-transform: uppercase;
+        }
+
+        .media .meta-data {
+            margin: 0 0 7px 0;
+        }
+
+        .media .longDate, .media .timeEl {
+            display: inline-block;
+            font-size: 14px;
+            line-height: 14px;
+            font-family: 'PT Sans Narrow', sans-serif;
+            font-weight: 700;
+            color: #636465;
+            text-transform: uppercase;
+            min-height: 16px;
+        }
+
+        .media .longDate {
+            background: transparent url(../images/ico-calendar.png) no-repeat left top;
+            padding: 0 10px 0 24px;
+            border-right: 1px solid #eb5b4c;
+            margin-right: 3px;
+        }
+
+        #tab1.tab-pane .media .longDate {
+            border-right: none;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        /*Star Rating system*/
+        body {
+            padding: 1em;
+        }
+
+        input {
+            position: absolute;
+            top: -2em;
+            clip: rect(0,0,0,0);
+        }
+
+        .score {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            text-align: left;
+            border: 0;
+            font-size: 0;
+        }
+
+            .score legend {
+                overflow: hidden;
+                height: 0;
             }
 
-    .score label:active {
+            .score label {
+                font-size: 32px;
+                font-size: 2rem;
+                line-height: 32px;
+                line-height: 2rem;
+                display: inline-block;
                 position: relative;
-                top: 1px;
+                text-align: center;
+                width: 1.2em;
+                height: 1em;
+                overflow: hidden;
+                text-indent: 100%;
             }
-</style>
+
+                .score label:before {
+                    content: "☆";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    text-indent: 0;
+                    line-height: 1em;
+                    color: #aaa;
+                }
+
+                .score label:hover:before,
+                .score label:hover ~ label:before,
+                .score input:checked ~ label:before {
+                    content: "★";
+                    color: #ffbb04;
+                }
+
+                .score label:active {
+                    position: relative;
+                    top: 1px;
+                }
+    </style>
 </head>
 
 <body>
