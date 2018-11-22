@@ -146,7 +146,8 @@ namespace Website.Controllers
                 FirstName = input.FirstName,
                 LastName = input.LastName, 
                 Password = input.Password,
-                Username = input.Username
+                Username = input.Username,
+                UserType = input.SelectedUserType
             };
 
             return output;
