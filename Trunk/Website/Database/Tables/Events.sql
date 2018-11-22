@@ -9,7 +9,7 @@
 	[Location] INT NOT NULL,
 	[ContactPhone] NVARCHAR(16) NOT NULL,
 	[ContactEmail] NVARCHAR(64) NOT NULL,
-	[EventAdmin] BIGINT NOT NULL,
+	[EventAdmin] INT NOT NULL,
 	[HostUniversity] INT NOT NULL, 
 	
     CONSTRAINT [FK_Events_EventType] FOREIGN KEY ([Type]) REFERENCES [EventType]([Id]),

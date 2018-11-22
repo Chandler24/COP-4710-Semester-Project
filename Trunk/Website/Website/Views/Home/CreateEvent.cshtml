@@ -1,4 +1,6 @@
-﻿﻿@{
+﻿@model Website.Models.CreateEventModel
+
+﻿@{
     Layout = null;
 }
 
@@ -53,44 +55,20 @@
             </div>
         </div>
     </div>
-
     <div class="form-style-2">
         <div class="form-style-2-heading">Provide the Event Information</div>
-        <form action="" method="post">
-            <label for="field1"><span> Admin Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
-            <label for="field2"><span>Admin Email <span class="required">*</span></span><input type="text" class="input-field" name="field2" value="" /></label>
-            <label><span>Admin Telephone</span><input type="text" class="tel-number-field" name="tel_no_1" value="" maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_2" value="" maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_3" value="" maxlength="10" /></label>
-            <label><span>Event Date and Time</span><input type="datetime-local" name="date and time" value="" /></label>
-
-            <label for="field4">
-                <span>Type of Event</span><select name="field4" class="select-field">
-                    <option value="RSO Event">RSO Event</option>
-                    <option value="Public Event">Public Event</option>
-                    <option value="Private Event">Private Event</option>
-                </select>
-            </label>
-            <label for="field5">
-                <span>Event Category</span> <select name="field5" class="select-field">
-                    <!-- Change these to dynamic-->
-                    <option value="RSO Event">RSO Event</option>
-                    <option value="Public Event">Public Event</option>
-                    <option value="Private Event">Private Event</option>
-                </select>
-            </label>
-            <label for="field6">
-                <span>Host University</span> <select name="field6" class="select-field">
-                    <!-- Change these to dynamic-->
-                    <option value="RSO Event">RSO Event</option>
-                    <option value="Public Event">Public Event</option>
-                    <option value="Private Event">Private Event</option>
-                </select>
-            </label>
-            <label for="field5"><span>Event Description <span class="required">*</span></span><textarea name="field5" class="textarea-field"></textarea></label>
-
+        @using (Html.BeginForm("AddEvent", "Home"))
+        {
+            <label for="field1"><span>@Html.LabelFor(m => m.Name)</span>@Html.TextBoxFor(m => m.Name, new { @class = "input-field" })</label>
+            <label><span>@Html.LabelFor(m => m.ContactEmail)</span>@Html.TextBoxFor(m => m.ContactEmail, new { @class = "input-field" })</label>
+            <label><span>@Html.LabelFor(m => m.ContactPhone)</span>@Html.TextBoxFor(m => m.ContactPhone, new { @class = "input-field" })</label>
+            <label><span>@Html.LabelFor(m => m.EventTypes)</span>@Html.DropDownListFor(m => m.SelectedEventType, new SelectList(Model.EventTypes, "Id", "Name"), "-- Select Event Type --", new { @class = "select-field" })</label>
+            <label for="field5"><span>@Html.LabelFor(m => m.EventCategories)</span>@Html.DropDownListFor(m => m.SelectedCategory, new SelectList(Model.EventCategories, "Id", "Name"), "-- Select Event Category --", new { @class = "select-field" })</label>
+            <label for="field6"><span>@Html.LabelFor(m => m.Universities)</span>@Html.DropDownListFor(m => m.SelectedUniversity, new SelectList(Model.Universities, "Id", "Name"), "-- Select University --", new { @class = "select-field" })</label>
+            <label for="field5"><span>@Html.LabelFor(m => m.Description)</span>@Html.TextAreaFor(m => m.Description, new { @rows = "5", cols = "50" })</label>
             <label><span> </span><input type="submit" value="Submit" /></label>
-        </form>
+        }
     </div>
-
     <div id="map" height="460px" width="400px"></div>
     <div id="form">
         <table>
