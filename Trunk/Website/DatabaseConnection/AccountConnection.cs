@@ -20,7 +20,8 @@ namespace DatabaseConnection
                 new SqlParameter("@FirstName", request.FirstName),
                 new SqlParameter("@LastName", request.LastName),
                 new SqlParameter("@Username", request.Username),
-                new SqlParameter("Password", request.Password)
+                new SqlParameter("Password", request.Password),
+                new SqlParameter("@UserType", request.UserType)
             };
 
             conn.ExecuteNonQuery("AddUser", sqlParams);
@@ -66,9 +67,14 @@ namespace DatabaseConnection
             return userTypes;
         }
 
-        public int SignIn(SignInRequest request)
+        public SignInResponse SignIn(SignInRequest request)
         {
-            int userId = -1;
+            SignInResponse response = new SignInResponse()
+            {
+                UserId = -1,
+                UserType = UserTypeEnum.NotValid
+            };
+
             SqlParameter[] sqlParams = new SqlParameter[]
             {
                 new SqlParameter("@Username", request.Username),
@@ -93,7 +99,25 @@ namespace DatabaseConnection
                         {
                             string password = reader.GetString(0);
                             if (password == request.Password)
-                                userId = reader.GetInt32(1);
+                            {
+                                response.UserId = reader.GetInt32(1);
+                                int usertype = reader.GetInt32(2);
+                                switch (usertype)
+                                {
+                                    case 0:
+                                        response.UserType = UserTypeEnum.SuperAdmin;
+                                        break;
+                                    case 1:
+                                        response.UserType = UserTypeEnum.Admin;
+                                        break;
+                                    case 2:
+                                        response.UserType = UserTypeEnum.Student;
+                                        break;
+                                    default:
+                                        response.UserType = UserTypeEnum.NotValid;
+                                        break;
+                                }
+                            }
                         }
                     }
                 }
@@ -106,7 +130,7 @@ namespace DatabaseConnection
                     connection.Close();
                 }
             }
-            return userId;
+            return response;
         }
     }
 }
