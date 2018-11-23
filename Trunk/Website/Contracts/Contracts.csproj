@@ -46,6 +46,7 @@
     <Compile Include="DataContracts\SaveEventRequest.cs" />
     <Compile Include="DataContracts\SaveUniversityRequest.cs" />
     <Compile Include="DataContracts\SignInRequest.cs" />
+    <Compile Include="DataContracts\SignInResponse.cs" />
     <Compile Include="DataContracts\SignupRequest.cs" />
     <Compile Include="DataContracts\UniversityResponse.cs" />
     <Compile Include="DataContracts\UserType.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="ServiceContracts\IAccountConnection.cs" />
     <Compile Include="ServiceContracts\IEventConnection.cs" />
     <Compile Include="ServiceContracts\IUniversityConnection.cs" />
+    <Compile Include="UserTypeEnum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

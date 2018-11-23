@@ -2,5 +2,5 @@
 	@Username nvarchar(128)
 AS
 BEGIN
-	SELECT [Password], Id FROM Users where Username = @Username
+	SELECT [Password], Id, UserType FROM Users where Username = @Username
 END

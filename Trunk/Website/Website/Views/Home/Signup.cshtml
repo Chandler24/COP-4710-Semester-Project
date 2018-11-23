@@ -47,6 +47,10 @@
                 @Html.PasswordFor(m => m.Password, new { @placeholder = "********" }) *
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
+            <div class="form-group">
+                <label>@Html.LabelFor(m => m.UserTypes)</label>
+                @Html.DropDownListFor(m => m.SelectedUserType, new SelectList(Model.UserTypes, "Id", "Description"), "-- Select User Type --") * 
+            </div>
             <div class="form-group error">
             </div>
             <div class="form-group">

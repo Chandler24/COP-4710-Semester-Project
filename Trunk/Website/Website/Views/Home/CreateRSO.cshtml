@@ -1,4 +1,7 @@
-﻿﻿@{
+﻿
+@model Website.Models.CreateRsoModel
+
+﻿@{
     Layout = null;
 }
 
@@ -43,31 +46,19 @@
 
     <div class="form-style-2">
         <div class="form-style-2-heading">Provide the RSO Information</div>
-        <form action="" method="post">
-            <label for="field1"><span> RSO Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
-            <label for="field2"><span>RSO Admin Email <span class="required">*</span></span><input type="text" class="input-field" name="field2" value="" /></label>
-
-
-            <label for="field3">
-                <span> Select the Host University</span> <select name="field3" class="select-field">
-                    <!-- Change these to dynamic-->
-                    <option value="RSO Event">RSO Event</option>
-                    <option value="Public Event">Public Event</option>
-                    <option value="Private Event">Private Event</option>
-                </select>
-            </label>
-            <label for="field4"><span>Event Description <span class="required">*</span></span><textarea name="field4" class="textarea-field"></textarea></label>
-
+        @using (Html.BeginForm("AddRso", "Home"))
+        {
+            <label for="field1"><span>@Html.LabelFor(m => m.Name)</span>@Html.TextBoxFor(m => m.Name, new { @class = "input-field" })</label>
+            <label for="field3"><span>@Html.LabelFor(m => m.Universities)</span>@Html.DropDownListFor(m => m.SelectedUniversity, new SelectList(Model.Universities, "Id", "Name"), "-- Select University --", new { @class = "select-field" })</label>
+            <label for="field4"><span>@Html.LabelFor(m => m.Description)</span>@Html.TextAreaFor(m => m.Description, new { @rows = "5", @cols = "50" })</label>
             <div class="form-style-2-heading">Provide five emails to invite members</div>
-            <label for="field5"><span>Member Email #1 <span class="required">*</span></span><input type="text" class="input-field" name="field5" value="" /></label>
-            <label for="field6"><span>Member Email #2 <span class="required">*</span></span><input type="text" class="input-field" name="field6" value="" /></label>
-            <label for="field7"><span>Member Email #3 <span class="required">*</span></span><input type="text" class="input-field" name="field7" value="" /></label>
-            <label for="field8"><span>Member Email #4 <span class="required">*</span></span><input type="text" class="input-field" name="field8" value="" /></label>
-            <label for="field9"><span>Member Email #5 <span class="required">*</span></span><input type="text" class="input-field" name="field9" value="" /></label>
-
-
+            <label for="field5"><span>@Html.LabelFor(m => m.Member1)</span>@Html.TextBoxFor(m => m.Member1, new { @class = "input-field" })</label>
+            <label for="field5"><span>@Html.LabelFor(m => m.Member2)</span>@Html.TextBoxFor(m => m.Member2, new { @class = "input-field" })</label>
+            <label for="field5"><span>@Html.LabelFor(m => m.Member3)</span>@Html.TextBoxFor(m => m.Member3, new { @class = "input-field" })</label>
+            <label for="field5"><span>@Html.LabelFor(m => m.Member4)</span>@Html.TextBoxFor(m => m.Member4, new { @class = "input-field" })</label>
+            <label for="field5"><span>@Html.LabelFor(m => m.Member5)</span>@Html.TextBoxFor(m => m.Member5, new { @class = "input-field" })</label>
             <label><span> </span><input type="submit" value="Submit" /></label>
-        </form>
+        } 
     </div>
 </body>
 </html>

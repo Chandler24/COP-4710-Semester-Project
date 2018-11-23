@@ -12,6 +12,6 @@ namespace Contracts
 
         void AddUser(SignupRequest request);
 
-        int SignIn(SignInRequest request);
+        SignInResponse SignIn(SignInRequest request);
     }
 }

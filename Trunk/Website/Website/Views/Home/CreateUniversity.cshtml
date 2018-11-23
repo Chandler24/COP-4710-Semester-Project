@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Website.Models.UniversityModel
+@{
     Layout = null;
 }
 
@@ -41,16 +42,18 @@
 
     <div class="form-style-2">
         <div class="form-style-2-heading">Provide the University Information</div>
-        <form action="" method="post">
-            <label for="field1"><span> University Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
-            <label><span>University Telephone</span><input type="text" class="tel-number-field" name="tel_no_1" value="" maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_2" value="" maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_3" value="" maxlength="10" /></label>
-            <label for="field2"><span> University Population <span class="required">*</span></span><input type="number" class="input-field" name="field2" value="" /></label>
-            <label for="field3"><span>RSO Description <span class="required">*</span></span><textarea name="field3" class="textarea-field"></textarea></label>
-            <label for="field4"><span> University Address <span class="required">*</span></span><input type="text" class="input-field" name="field4" value="" /></label>
-
-
+        @using (Html.BeginForm("AddUniversity", "Home"))
+        {
+            <label for="field1"><span>@Html.LabelFor(m => m.Name)</span>@Html.TextBoxFor(m => m.Name, new { @class = "input-field" })</label>          
+            <label for="field2"><span>@Html.LabelFor(m => m.NumberOfStudents)</span>@Html.TextBoxFor(m => m.NumberOfStudents, new { @class = "input-field" })</label>
+            <label for="field3"><span>@Html.LabelFor(m => m.Description)</span>@Html.TextAreaFor(m => m.Description, new { @rows = "5", @cols = "50" })</label>
+            <label for="field4"><span>@Html.LabelFor(m => m.PrimaryAddress)</span>@Html.TextBoxFor(m => m.PrimaryAddress, new { @name = "address-line1", @placeholder = "123 SW Knights Way", @class = "input-field" })</label>
+            <label for="field5"><span>@Html.LabelFor(m => m.SecondaryAddress)</span>@Html.TextBoxFor(m => m.SecondaryAddress, new { @name = "address-line1", @placeholder = "Building 8 Apt 312", @class = "input-field" })</label>
+            <label for="field6"><span>@Html.LabelFor(m => m.City)</span>@Html.TextBoxFor(m => m.City, new { @name = "address-city", @placeholder = "Orlando", @class = "input-field" })</label>
+            <label for="field7"><span>@Html.LabelFor(m => m.State)</span>@Html.TextBoxFor(m => m.State, new { @name = "address-state", @placeholder = "Florida", @class = "input-field" })</label>
+            <label for="field8"><span>@Html.LabelFor(m => m.Zip)</span>@Html.TextBoxFor(m => m.Zip, new { @name = "address-zip", @placeholder = "32825", @class = "input-field" })</label>
             <label><span> </span><input type="submit" value="Submit" /></label>
-        </form>
+        }
     </div>
 </body>
 </html>

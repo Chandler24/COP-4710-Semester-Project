@@ -65,12 +65,13 @@ namespace Website.Controllers
                     Username = model.Username,
                     Password = model.Password
                 };
-                int userId = accountConnection.SignIn(request);
-                if (userId != -1)
+                SignInResponse response = accountConnection.SignIn(request);
+                if (response.UserId != -1)
                 {
                     // Redirect the user to home and store the user id as a session variable. Helps for account tracking.
                     viewName = "Home";
-                    Session["UserId"] = userId;
+                    Session["UserId"] = response.UserId;
+                    Session["UserType"] = response.UserType;
                 }
             }
 
@@ -146,7 +147,8 @@ namespace Website.Controllers
                 FirstName = input.FirstName,
                 LastName = input.LastName, 
                 Password = input.Password,
-                Username = input.Username
+                Username = input.Username,
+                UserType = input.SelectedUserType
             };
 
             return output;
