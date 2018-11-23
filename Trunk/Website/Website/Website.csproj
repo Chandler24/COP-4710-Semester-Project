@@ -322,6 +322,7 @@
     <Content Include="Views\Home\CreateEvent.cshtml" />
     <Content Include="Views\Home\CreateUniversity.cshtml" />
     <Content Include="Views\Home\CreateRSO.cshtml" />
+    <Content Include="Views\Home\JoinRSO.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -43,6 +43,12 @@ namespace Website.Controllers
             return View();
         }
 
+        public ActionResult JoinRSO()
+        {
+            ViewBag.Title = "Join RSO";
+            return View();
+        }
+
         public ActionResult CreateRSO()
         {
             ViewBag.Title = "Create RSO";
