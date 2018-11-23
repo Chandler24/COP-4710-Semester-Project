@@ -161,6 +161,7 @@ namespace Website.Controllers
             {
                 EventModel m = new EventModel
                 {
+                    EventId = e.EventId,
                     Date = e.Date,
                     Description = e.Description,
                     Month = e.Month,

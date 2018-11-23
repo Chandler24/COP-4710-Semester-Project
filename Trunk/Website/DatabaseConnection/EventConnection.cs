@@ -33,6 +33,7 @@ namespace DatabaseConnection
                         while (reader.Read())
                         {
                             Events e = new Events();
+                            e.EventId = reader.GetInt32(0);
                             e.Name = reader.GetString(1);
                             e.Date = reader.GetDateTime(2);
                             switch (e.Date.Month)
@@ -97,6 +98,7 @@ namespace DatabaseConnection
                                     e.Rating = RatingEnum.FiveStars;
                                     break;
                             }
+
                             events.Add(e);
                         }
                     }

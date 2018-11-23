@@ -162,9 +162,21 @@
 
     <div class="navbar">
         <a href="~/Home/Home"> Home </a>
-        <a href="~/Home/CreateEvent">Add Event</a>
-        <a href="~/Home/CreateRSO">Add RSO</a>
-        <a href="~/Home/CreateUniversity">Add University</a>
+        @if ((int)Session["UserType"] == 1)
+        {
+            <a href="~/Home/CreateEvent">Add Event</a>
+            <a href="~/Home/CreateRSO">Add RSO</a>
+            <a href="~/Home/CreateUniversity">Add University</a>
+        }
+        else if ((int)Session["UserType"] == 2)
+        {
+            <a href="~/Home/CreateEvent">Add Event</a>
+            <a href="~/Home/CreateUniversity">Add University</a>
+        }
+        else if((int)Session["UserType"] == 3)
+        {
+            <a href="~/Home/CreateEvent">Add Event</a>
+        }
         <div class="dropdown">
             <button class="dropbtn" onclick="myFunction()">
                 Select University
@@ -222,16 +234,17 @@
 
                                 </div>
                                 <div>
-                                    <button data-eventid="@m.Id">Add Comment</button>
+                                    <button class="comment-button" data-eventid="@m.EventId">Add Comment</button>
                                     <button>View Comments</button>
+                                </div>
+                                <div>
+                                    <textarea id="CommentBox-@m.EventId" data-eventid="@m.EventId" style="display:none; margin-left:113px; margin-top:20px; width:400px; height:100px;"></textarea>
+                                    <button class="post-comment-button" id="PostComment-@m.EventId" data-eventid="@m.EventId" style="display:none; margin-left:113px; margin-top:20px;">Post Comment</button>
                                 </div>
                                 <br />
                                 <br />
 
                             }
-
-
-
 
 
 
@@ -266,7 +279,21 @@
                 js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));</script>
+        $('.comment-button').on('click', function () {
+            var commentBoxId = 'CommentBox-' + $(this).attr('data-eventid');
+            var postCommentButtonId = 'PostComment-' + $(this).attr('data-eventid');
+            document.getElementById(commentBoxId).style.display = "block";
+            document.getElementById(postCommentButtonId).style.display = "block";
+        })
+
+        $('.post-comment-button').on('click', function () {
+            var commentBoxId = 'CommentBox-' + $(this).attr('data-eventid');
+            var postCommentButtonId = 'PostComment-' + $(this).attr('data-eventid');
+            document.getElementById(commentBoxId).style.display = "none";
+            document.getElementById(postCommentButtonId).style.display = "none";
+        })
+
+
     </script>        
     </body>
-
 </html>
