@@ -15,5 +15,13 @@ namespace Contracts
         List<EventTypeResponse> GetEventTypes();
 
         void SaveEvent(SaveEventRequest request);
+
+        void AddComment(AddCommentRequest request);
+
+        List<EventComments> GetCommentsForEvent(int eventId);
+
+        void EditComment(int commentId, string editedComment);
+
+        void DeleteComment(int commentId);
     }
 }

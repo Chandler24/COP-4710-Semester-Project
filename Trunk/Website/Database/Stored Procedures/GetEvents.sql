@@ -8,7 +8,7 @@ BEGIN
 			ISNULL(
 				(SUM(es.Rating) / COUNT(es.Rating)) 
 			, 0)
-			as EventRating 
+			as EventRating
 	FROM [Events] e
 	LEFT JOIN EventSocial es
 	ON e.Id = es.EventId

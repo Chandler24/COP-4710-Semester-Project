@@ -222,5 +222,95 @@ namespace DatabaseConnection
 
             return response;
         }
+
+        public void AddComment(AddCommentRequest request)
+        {
+            ConnectionHelper conn = new ConnectionHelper();
+
+            SqlParameter[] sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("@UserId", request.UserId),
+                new SqlParameter("@EventId", request.EventId),
+                new SqlParameter("@Comment", request.Comment)
+            };
+
+            conn.ExecuteNonQuery("AddComment", sqlParams);
+        }
+
+        public List<EventComments> GetCommentsForEvent(int eventId)
+        {
+            List<EventComments> response = new List<EventComments>();
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlParameter[] sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("@EventId", eventId)
+                };
+
+                SqlCommand command = new SqlCommand();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "GetCommentsForEvents";
+                command.Parameters.AddRange(sqlParams);
+                command.Connection = connection;
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            EventComments e = new EventComments()
+                            {
+                                FirstName = reader.GetString(0),
+                                LastName = reader.GetString(1),
+                                Comment = reader.GetString(2),
+                                CommentId = reader.GetInt32(3)
+                            };
+
+                            response.Add(e);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+
+            return response;
+        }
+
+        public void EditComment(int commentId, string editedComment)
+        {
+            ConnectionHelper conn = new ConnectionHelper();
+
+            SqlParameter[] sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("Id", commentId),
+                new SqlParameter("EditedComment", editedComment)
+            };
+
+            conn.ExecuteNonQuery("EditComment", sqlParams);
+        }
+
+        public void DeleteComment(int commentId)
+        {
+            ConnectionHelper conn = new ConnectionHelper();
+
+            SqlParameter[] sqlParams = new SqlParameter[]
+            {
+                new SqlParameter("Id", commentId),
+            };
+
+            conn.ExecuteNonQuery("DeleteComment", sqlParams);
+        }
     }
 }

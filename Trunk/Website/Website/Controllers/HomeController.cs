@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Website.Models;
 using Contracts;
 using DatabaseConnection;
+using System.Threading.Tasks;
 
 namespace Website.Controllers
 {
@@ -139,6 +140,73 @@ namespace Website.Controllers
             return RedirectToAction("Home");
         }
 
+        [HttpPost]
+        public bool AddComment(int eventId, string comment)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(comment))
+                    return false;
+                
+                int userId = (int)Session["UserId"];
+                AddCommentRequest request = new AddCommentRequest()
+                {
+                    UserId = userId,
+                    EventId = eventId,
+                    Comment = comment
+                };
+
+                EventConnection conn = new EventConnection();
+                conn.AddComment(request);
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+        [HttpPost]
+        public bool EditComment(int commentId, string editedComment)
+        {
+            try
+            {
+                EventConnection conn = new EventConnection();
+                conn.EditComment(commentId, editedComment);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        [HttpPost]
+        public bool DeleteComment(int commentId)
+        {
+            try
+            {
+                EventConnection conn = new EventConnection();
+                conn.DeleteComment(commentId);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+        [HttpPost]
+        public JsonResult GetEventComments(int eventId)
+        {
+            EventConnection conn = new EventConnection();
+            List<EventComments> response = conn.GetCommentsForEvent(eventId);
+            List<EventCommentModel> comments = ConvertEventComments(response, eventId);
+            return Json(comments);
+        }
+
         // Private conversion methods
         private SignupRequest ConvertSignUpModel(SignupModel input)
         {
@@ -243,6 +311,26 @@ namespace Website.Controllers
                 };
 
                 output.Add(type);
+            }
+
+            return output;
+        }
+
+        private List<EventCommentModel> ConvertEventComments(List<EventComments> input, int eventId)
+        {
+            List<EventCommentModel> output = new List<EventCommentModel>();
+
+            foreach (EventComments e in input)
+            {
+                EventCommentModel m = new EventCommentModel()
+                {
+                    Comment = e.Comment,
+                    Name = e.FirstName + " " + e.LastName,
+                    CommentId = e.CommentId,
+                    EventId = eventId
+                };
+
+                output.Add(m);
             }
 
             return output;

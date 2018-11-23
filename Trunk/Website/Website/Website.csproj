@@ -244,6 +244,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CreateEventModel.cs" />
     <Compile Include="Models\CreateRsoModel.cs" />
+    <Compile Include="Models\EventCommentModel.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />

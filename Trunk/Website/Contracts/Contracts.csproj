@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContracts\AddCommentRequest.cs" />
     <Compile Include="DataContracts\EventCategoryResponse.cs" />
+    <Compile Include="DataContracts\EventComments.cs" />
     <Compile Include="DataContracts\Events.cs" />
     <Compile Include="DataContracts\EventTypeResponse.cs" />
     <Compile Include="DataContracts\SaveEventRequest.cs" />

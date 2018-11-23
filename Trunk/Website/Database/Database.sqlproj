@@ -80,5 +80,9 @@
     <Build Include="Stored Procedures\GetEventCategories.sql" />
     <Build Include="Stored Procedures\SaveEvent.sql" />
     <Build Include="Stored Procedures\GetEventTypes.sql" />
+    <Build Include="Stored Procedures\AddComment.sql" />
+    <Build Include="Stored Procedures\GetCommentsForEvents.sql" />
+    <Build Include="Stored Procedures\EditComment.sql" />
+    <Build Include="Stored Procedures\DeleteComment.sql" />
   </ItemGroup>
 </Project>

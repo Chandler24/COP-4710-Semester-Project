@@ -228,15 +228,21 @@
                                 </div>
                                 <div>
                                     <button class="comment-button" data-eventid="@m.EventId">Add Comment</button>
-                                    <button>View Comments</button>
+                                    <button class="view-comments" data-eventid="@m.EventId">View Comments</button>
                                 </div>
                                 <div>
                                     <textarea id="CommentBox-@m.EventId" data-eventid="@m.EventId" style="display:none; margin-left:113px; margin-top:20px; width:400px; height:100px;"></textarea>
                                     <button class="post-comment-button" id="PostComment-@m.EventId" data-eventid="@m.EventId" style="display:none; margin-left:113px; margin-top:20px;">Post Comment</button>
                                 </div>
                                 <br />
-                                <br />
+                                <div id="commentsWrapper-@m.EventId" style="display:none;">
+                                    <h4 style="margin-left:113px; margin-bottom:10px;">Comments</h4>
+                                    <!-- Comments Below -->
+                                    <div id="comments-@m.EventId">
 
+                                    </div>
+                                    <button style="margin-left:113px; margin-bottom:10px;" class="collapse-comments" data-eventid="@m.EventId">Collapse Comments</button>
+                                </div>
                             }
                         </div><!-- / media-body -->
                     </div><!-- / media -->
@@ -269,12 +275,132 @@
         })
 
         $('.post-comment-button').on('click', function () {
-            var commentBoxId = 'CommentBox-' + $(this).attr('data-eventid');
-            var postCommentButtonId = 'PostComment-' + $(this).attr('data-eventid');
-            document.getElementById(commentBoxId).style.display = "none";
-            document.getElementById(postCommentButtonId).style.display = "none";
+            var eventId = $(this).attr('data-eventid');
+            var comment = $('#CommentBox-' + eventId).val();
+
+            var commentBoxId = 'CommentBox-' + eventId;
+            var postCommentButtonId = 'PostComment-' + eventId;
+            
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddComment", "Home")',
+                data: {
+                    eventId: eventId,
+                    comment: comment
+                }
+            }).done(function (result) {
+                if (result == "True") {
+                    document.getElementById(commentBoxId).style.display = "none";
+                    document.getElementById(postCommentButtonId).style.display = "none";
+                }
+                else alert("There was an error adding the comment.");
+            })
         })
 
+        $('.view-comments').on('click', function () {
+            var eventId = $(this).attr('data-eventid');
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetEventComments", "Home")',
+                data: {
+                    eventId: eventId
+                }
+            }).done(function (result) {
+                var commentHtml = '';
+                var eventId = '';
+
+                if (result.length > 0) {
+                    eventId = result[0].EventId;
+
+                    for (i = 0; i < result.length; i++) {
+                        var comment = result[i].Comment;
+                        var name = result[i].Name;
+                        var commentId = result[i].CommentId;
+
+                        // Wrapper
+                        commentHtml += '<div class="row" style="margin-left:113px; margin-bottom:10px; margin-top:10px;">';
+
+                        // Name
+                        commentHtml += '<div class="col-md-10">';
+                        commentHtml += '<strong>' + name + '</strong>';
+                        commentHtml += '</div>';
+
+                        // Comment 
+                        commentHtml += '<div class="col-md-10" id="viewComment-' + commentId + '">';
+                        commentHtml += '<p id="commentDisplay-' + commentId + '">' + comment + '</p>';
+                        commentHtml += '</div>';
+
+                        // Hidden comment for editing
+                        commentHtml += '<div class="col-md-10" style="display:none" id="editCommentBox-' + commentId + '">';
+                        commentHtml += '<textarea id="editCommentTextArea-' + commentId + '" style="width:400px; height:100px;" type="text" value="' + comment + '">' + comment + '</textarea>';
+                        commentHtml += '<br /><button class="saveEditedComment" data-commentId="' + commentId + '">Save Edit</button>'
+                        commentHtml += '</div>';
+
+                        // Edit / Delete
+                        commentHtml += '<button style="margin-right:10px;" id="editComment-' + commentId + '" class="editcomment" data-commentId="' + commentId + '">Edit</button>'
+                        commentHtml += '<button class="deletecomment" id="deleteComment-' + commentId + '" data-commentId="' + commentId + '">Delete</button>'
+
+                        // Close the wrapper 
+                        commentHtml += '</div>';
+                    }
+
+                    document.getElementById('comments-' + eventId).innerHTML = commentHtml;
+                    document.getElementById('commentsWrapper-' + eventId).style.display = "block";
+                }
+                else {
+                    alert('There are currently no comments for this event!');
+                }
+            })
+        })
+
+        $('.collapse-comments').on('click', function () {
+            var eventId = $(this).attr('data-eventid');
+            var commentWrapperId = 'commentsWrapper-' + eventId;
+            document.getElementById(commentWrapperId).style.display = "none";
+        })
+
+        $(document).on('click', '.editcomment', function (e) {
+            e.preventDefault();
+            var commentId = $(this).attr('data-commentId');
+            $('#viewComment-' + commentId).css('display', 'none');
+            $('#editCommentBox-' + commentId).css('display', 'block');
+            $('#editComment-' + commentId).css('display', 'none');
+            $('#deleteComment-' + commentId).css('display', 'none');
+        })
+
+        $(document).on('click', '.saveEditedComment', function (e) {
+            e.preventDefault();
+            var commentId = $(this).attr('data-commentId');
+            var editedComment = $('#editCommentTextArea-' + commentId).val();
+            document.getElementById('commentDisplay-' + commentId).innerText = editedComment;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("EditComment", "Home")',
+                data: {
+                    commentId: commentId,
+                    editedComment: editedComment
+                }
+            }).done(function (result) {
+                $('#viewComment-' + commentId).css('display', 'block');
+                $('#editCommentBox-' + commentId).css('display', 'none');
+                $('#editComment-' + commentId).css('display', 'block');
+                $('#deleteComment-' + commentId).css('display', 'block');
+            })
+        })
+
+        $(document).on('click', '.deletecomment', function (e) {
+            e.preventDefault();
+            var commentId = $(this).attr('data-commentId');
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("DeleteComment", "Home")',
+                data: {
+                    commentId: commentId
+                }
+            }).done(function (result) {
+                
+            })
+        })
 
     </script>        
     </body>
