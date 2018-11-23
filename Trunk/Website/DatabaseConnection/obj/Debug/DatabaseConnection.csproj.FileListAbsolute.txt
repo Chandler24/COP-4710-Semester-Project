@@ -23,3 +23,12 @@ C:\Users\jesse alsing\Desktop\Database Systems\AA\COP-4710-Semester-Project\Trun
 C:\Users\jesse alsing\Desktop\Database Systems\AA\COP-4710-Semester-Project\Trunk\Website\DatabaseConnection\obj\Debug\DatabaseConnection.csproj.CopyComplete
 C:\Users\jesse alsing\Desktop\Database Systems\AA\COP-4710-Semester-Project\Trunk\Website\DatabaseConnection\obj\Debug\DatabaseConnection.dll
 C:\Users\jesse alsing\Desktop\Database Systems\AA\COP-4710-Semester-Project\Trunk\Website\DatabaseConnection\obj\Debug\DatabaseConnection.pdb
+C:\Users\jesse alsing\Desktop\Database Systems\AAA\COP-4710-Semester-Project\Trunk\Website\DatabaseConnection\bin\Debug\DatabaseConnection.dll
+C:\Users\jesse alsing\Desktop\Database Systems\AAA\COP-4710-Semester-Project\Trunk\Website\DatabaseConnection\bin\Debug\DatabaseConnection.pdb
+C:\Users\jesse alsing\Desktop\Database Systems\AAA\COP-4710-Semester-Project\Trunk\Website\DatabaseConnection\bin\Debug\Contracts.dll
+C:\Users\jesse alsing\Desktop\Database Systems\AAA\COP-4710-Semester-Project\Trunk\Website\DatabaseConnection\bin\Debug\Contracts.pdb
+C:\Users\jesse alsing\Desktop\Database Systems\AAA\COP-4710-Semester-Project\Trunk\Website\DatabaseConnection\obj\Debug\DatabaseConnection.csprojResolveAssemblyReference.cache
+C:\Users\jesse alsing\Desktop\Database Systems\AAA\COP-4710-Semester-Project\Trunk\Website\DatabaseConnection\obj\Debug\DatabaseConnection.csproj.CoreCompileInputs.cache
+C:\Users\jesse alsing\Desktop\Database Systems\AAA\COP-4710-Semester-Project\Trunk\Website\DatabaseConnection\obj\Debug\DatabaseConnection.csproj.CopyComplete
+C:\Users\jesse alsing\Desktop\Database Systems\AAA\COP-4710-Semester-Project\Trunk\Website\DatabaseConnection\obj\Debug\DatabaseConnection.dll
+C:\Users\jesse alsing\Desktop\Database Systems\AAA\COP-4710-Semester-Project\Trunk\Website\DatabaseConnection\obj\Debug\DatabaseConnection.pdb

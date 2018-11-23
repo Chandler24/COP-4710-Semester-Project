@@ -17,6 +17,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="~/Content/dropDownMenu.css">
 
+    <!-- You can use Open Graph tags to customize link previews.
+    Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+    <meta property="og:url" content="~/Home/Home" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Events Page" />
+    <meta property="og:description" content="Events page for university events" />
+
     <style>
         /*Event styling*/
 
@@ -156,20 +163,23 @@
     <div class="navbar">
         <a href="~/Home/Home"> Home </a>
         @if ((int)Session["UserType"] == 1)
-        {
-            <a href="~/Home/CreateEvent">Add Event</a>
-            <a href="~/Home/CreateRSO">Add RSO</a>
-            <a href="~/Home/CreateUniversity">Add University</a>
-        }
-        else if ((int)Session["UserType"] == 2)
-        {
-            <a href="~/Home/CreateEvent">Add Event</a>
-            <a href="~/Home/CreateUniversity">Add University</a>
-        }
-        else if((int)Session["UserType"] == 3)
-        {
-            <a href="~/Home/CreateEvent">Add Event</a>
-        }
+    {
+
+        <a href="~/Home/CreateEvent">Add Event</a>
+        <a href="~/Home/CreateRSO">Add RSO</a>
+        <a href="~/Home/CreateUniversity">Add University</a>
+}
+else if ((int)Session["UserType"] == 2)
+{
+    <a href="~/Home/JoinRSO">Join RSO</a>
+    <a href="~/Home/CreateEvent">Add Event</a>
+    <a href="~/Home/CreateUniversity">Add University</a>
+}
+else if ((int)Session["UserType"] == 3)
+{
+    <a href="~/Home/JoinRSO">Join RSO</a>
+    <a href="~/Home/CreateEvent">Add Event</a>
+}
         <div class="dropdown">
             <button class="dropbtn" onclick="myFunction()">
                 Select University
@@ -189,39 +199,39 @@
                     <div class="media">
                         <div class="media-body">
 
-                            @foreach (Website.Models.EventModel m in Model.Events)
-                            {
-                                <a class="pull-left" href="#"><span class="dateEl"><em>@m.Date.Day</em>@m.Month</span></a>
+                           @foreach (Website.Models.EventModel m in Model.Events)
+    {
+                        <a class="pull-left" href="#"><span class="dateEl"><em>@m.Date.Day</em>@m.Month</span></a>
 
-                                <h4 class="media-heading">
-                                    <a href="#">@m.Name</a>
-                                </h4>
-                                <div class="meta-data">
-                                    <span class="longDate">@m.Date.ToShortDateString()</span> <span class="timeEl">@m.Date.ToShortTimeString()</span>
-                                </div>
-                                <p>
-                                    @m.Description
-                                </p>
+                        <h4 class="media-heading">
+                            <a href="#">@m.Name</a>
+                        </h4>
+                        <div class="meta-data">
+                            <span class="longDate">@m.Date.ToShortDateString()</span> <span class="timeEl">@m.Date.ToShortTimeString()</span>
+                        </div>
+                        <p>
+                            @m.Description
+                        </p>
 
-                                <!-- Add the UI for rating in the corresponding case -->
-                                <div>
-                                    <fieldset class="score">
-                                        <legend>Score:</legend>
+                        <!-- Add the UI for rating in the corresponding case -->
+                        <div>
+                            <fieldset class="score">
+                                <legend>Score:</legend>
 
-                                        <input type="radio" id="score-5" name="score" value="5" />
-                                        <label title="5 stars" for="score-5">5 stars</label>
+                                <input type="radio" id="score-5" name="score" value="5" />
+                                <label title="5 stars" for="score-5">5 stars</label>
 
-                                        <input type="radio" id="score-4" name="score" value="4" />
-                                        <label title="4 stars" for="score-4">4 stars</label>
+                                <input type="radio" id="score-4" name="score" value="4" />
+                                <label title="4 stars" for="score-4">4 stars</label>
 
-                                        <input type="radio" id="score-3" name="score" value="3" />
-                                        <label title="3 stars" for="score-3">3 stars</label>
+                                <input type="radio" id="score-3" name="score" value="3" />
+                                <label title="3 stars" for="score-3">3 stars</label>
 
-                                        <input type="radio" id="score-2" name="score" value="2" />
-                                        <label title="2 stars" for="score-2">2 stars</label>
+                                <input type="radio" id="score-2" name="score" value="2" />
+                                <label title="2 stars" for="score-2">2 stars</label>
 
-                                        <input type="radio" id="score-1" name="score" value="1" />
-                                        <label title="1 stars" for="score-1">1 stars</label>
+                                <input type="radio" id="score-1" name="score" value="1" />
+                                <label title="1 stars" for="score-1">1 stars</label>
 
                                     </fieldset>
 
@@ -244,12 +254,16 @@
                                     <button style="margin-left:113px; margin-bottom:10px;" class="collapse-comments" data-eventid="@m.EventId">Collapse Comments</button>
                                 </div>
                             }
+
+
+
                         </div><!-- / media-body -->
                     </div><!-- / media -->
                 </div>
             </div>
         </div>
-    </div>    
+    </div> 
+    
     <script>
         /* When the user clicks on the button,
         toggle between hiding and showing the dropdown content */
@@ -266,7 +280,14 @@
                 }
             }
         }
-
+            /*this is for the share facecbook button*/
+            <script>(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
         $('.comment-button').on('click', function () {
             var commentBoxId = 'CommentBox-' + $(this).attr('data-eventid');
             var postCommentButtonId = 'PostComment-' + $(this).attr('data-eventid');
