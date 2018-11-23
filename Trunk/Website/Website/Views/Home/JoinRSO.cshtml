@@ -1,4 +1,5 @@
-﻿
+﻿@model Website.Models.JoinRsoModel
+
 @{
     Layout = null;
 }
@@ -71,16 +72,35 @@
     </div>
     <br />
     <br />
-    <div class="styling">
+    <div id="rsoList" class="styling">
         <div class="form-style-2-heading">Below are the Registered Student Organizations to join</div>
-        <div>
-            <dl>
-                <button class="button">Join RSO 1</button> 
+        <dl>
+            @for(int i = 0; i < Model.RegisteredStudentOrganizations.Count; i++)
+            {
+                <button class="joinrso" style="display: inline-block;padding: 15px 20px;font-size: 15px;cursor: pointer;text-align: center;outline: none;color: white;background-color: grey;border: none;border-radius: 15px;" data-rsoId="@Model.RegisteredStudentOrganizations[i].Id" class="button">@Model.RegisteredStudentOrganizations[i].Name</button>
                 <br />
                 <br />
-                <dd>here is the description for RSO 1. they have alot of informaton and alot of text to work with lets see how this goes!</dd>  
-            </dl>
-
+                <dd>@Model.RegisteredStudentOrganizations[i].Description</dd>
+                <br />
+                <br />
+            }
+       </dl>
     </div>
+
+    <script type="text/javascript">
+        $('.joinrso').on('click', function () {
+            var rsoId = $(this).attr('data-rsoid');
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("JoinNewRso", "Home")',
+                data: {
+                    rsoId: rsoId
+                }
+            }).done(function (result) {
+                alert(result);
+            })
+        })
+    </script>
 </body>
 </html>
+

@@ -45,6 +45,7 @@
     <Compile Include="ConnectionHelper.cs" />
     <Compile Include="EventConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RsoConnection.cs" />
     <Compile Include="UniversityConnection.cs" />
   </ItemGroup>
   <ItemGroup>

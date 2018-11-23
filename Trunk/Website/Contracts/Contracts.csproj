@@ -45,7 +45,9 @@
     <Compile Include="DataContracts\EventComments.cs" />
     <Compile Include="DataContracts\Events.cs" />
     <Compile Include="DataContracts\EventTypeResponse.cs" />
+    <Compile Include="DataContracts\RegisteredStudentOrganization.cs" />
     <Compile Include="DataContracts\SaveEventRequest.cs" />
+    <Compile Include="DataContracts\SaveRsoRequest.cs" />
     <Compile Include="DataContracts\SaveUniversityRequest.cs" />
     <Compile Include="DataContracts\SignInRequest.cs" />
     <Compile Include="DataContracts\SignInResponse.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="RatingEnum.cs" />
     <Compile Include="ServiceContracts\IAccountConnection.cs" />
     <Compile Include="ServiceContracts\IEventConnection.cs" />
+    <Compile Include="ServiceContracts\IRsoConnection.cs" />
     <Compile Include="ServiceContracts\IUniversityConnection.cs" />
     <Compile Include="UserTypeEnum.cs" />
   </ItemGroup>

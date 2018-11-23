@@ -84,5 +84,8 @@
     <Build Include="Stored Procedures\GetCommentsForEvents.sql" />
     <Build Include="Stored Procedures\EditComment.sql" />
     <Build Include="Stored Procedures\DeleteComment.sql" />
+    <Build Include="Stored Procedures\GetAllRsos.sql" />
+    <Build Include="Stored Procedures\CheckIfUserIsInRso.sql" />
+    <Build Include="Stored Procedures\JoinRso.sql" />
   </ItemGroup>
 </Project>

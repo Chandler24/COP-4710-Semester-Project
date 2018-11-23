@@ -47,7 +47,11 @@ namespace Website.Controllers
         public ActionResult JoinRSO()
         {
             ViewBag.Title = "Join RSO";
-            return View();
+            RsoConnection conn = new RsoConnection();
+            JoinRsoModel model = new JoinRsoModel();
+            List<RegisteredStudentOrganization> rsos = conn.GetAllRsos();
+            model.RegisteredStudentOrganizations = ConvertRsos(rsos);
+            return View(model);
         }
 
         public ActionResult CreateRSO()
@@ -79,6 +83,7 @@ namespace Website.Controllers
                     viewName = "Home";
                     Session["UserId"] = response.UserId;
                     Session["UserType"] = response.UserType;
+                    Session["Username"] = model.Username;
                 }
             }
 
@@ -203,7 +208,6 @@ namespace Website.Controllers
             return true;
         }
 
-
         [HttpPost]
         public JsonResult GetEventComments(int eventId)
         {
@@ -211,6 +215,30 @@ namespace Website.Controllers
             List<EventComments> response = conn.GetCommentsForEvent(eventId);
             List<EventCommentModel> comments = ConvertEventComments(response, eventId);
             return Json(comments);
+        }
+
+        public ActionResult AddRso(CreateRsoModel model)
+        {
+            SaveRsoRequest request = PrepareSaveRsoRequest(model);
+            RsoConnection conn = new RsoConnection();
+            conn.SaveRso(request);
+            return RedirectToAction("Home");
+        }
+
+        public JsonResult JoinNewRso(int rsoId)
+        {
+            int userId = Convert.ToInt32(Session["UserId"]);
+            RsoConnection conn = new RsoConnection();
+            bool userInRso = conn.CheckIfUserIsInRso(userId, rsoId);
+
+            if (userInRso)
+            {
+                return Json("You've already joined this Rso!");
+            }
+
+            conn.JoinRso(rsoId, userId);
+
+            return Json("Success! You've joined the RSO!");
         }
 
         // Private conversion methods
@@ -339,6 +367,66 @@ namespace Website.Controllers
                 output.Add(m);
             }
 
+            return output;
+        }
+
+        private SaveRsoRequest PrepareSaveRsoRequest(CreateRsoModel model)
+        {
+            string username = Session["Username"].ToString();
+            SaveRsoRequest request = new SaveRsoRequest()
+            {
+                AdminEmail = username,
+                Description = model.Description,
+                Name = model.Name,
+                University = model.SelectedUniversity
+            };
+
+            if (ValidateMembers(model))
+            {
+                request.Members = new List<string>();
+                request.Members.Add(model.Member1);
+                request.Members.Add(model.Member2);
+                request.Members.Add(model.Member3);
+                request.Members.Add(model.Member4);
+                request.Members.Add(model.Member5);
+            }
+
+            return request;
+        }
+
+        private bool ValidateMembers(CreateRsoModel model)
+        {
+            bool result = true;
+
+            if (!string.IsNullOrEmpty(model.Member1) && !string.IsNullOrEmpty(model.Member2) && !string.IsNullOrEmpty(model.Member3) && !string.IsNullOrEmpty(model.Member4) && !string.IsNullOrEmpty(model.Member5))
+            {
+                string emailDomain = model.Member1.Substring(model.Member1.LastIndexOf('@') + 1);
+
+                if (model.Member2.Contains(emailDomain) && model.Member3.Contains(emailDomain) && model.Member4.Contains(emailDomain) && model.Member5.Contains(emailDomain))
+                    result = true;
+                else
+                    result = false;
+            }
+            else
+                result = false;
+
+            return result;
+        }
+
+        private List<Rso> ConvertRsos(List<RegisteredStudentOrganization> input)
+        {
+            List<Rso> output = new List<Rso>();
+            foreach(RegisteredStudentOrganization r in input)
+            {
+                Rso rso = new Rso()
+                {
+                    Id = r.RsoId,
+                    Description = r.Description,
+                    Name = r.Name
+                };
+
+                output.Add(rso);
+            }
             return output;
         }
     }

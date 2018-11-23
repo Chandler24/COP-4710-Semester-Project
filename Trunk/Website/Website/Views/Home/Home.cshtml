@@ -271,23 +271,7 @@ else if ((int)Session["UserType"] == 3)
             document.getElementById("myDropdown").classList.toggle("show");
         }
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function (e) {
-            if (!e.target.matches('.dropbtn')) {
-                var myDropdown = document.getElementById("myDropdown");
-                if (myDropdown.classList.contains('show')) {
-                    myDropdown.classList.remove('show');
-                }
-            }
-        }
-            /*this is for the share facecbook button*/
-            <script>(function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
+
         $('.comment-button').on('click', function () {
             var commentBoxId = 'CommentBox-' + $(this).attr('data-eventid');
             var postCommentButtonId = 'PostComment-' + $(this).attr('data-eventid');

@@ -248,6 +248,7 @@
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JoinRsoModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SignupModel.cs" />
     <Compile Include="Models\UniversityModel.cs" />
