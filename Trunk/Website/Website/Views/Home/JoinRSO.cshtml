@@ -1,0 +1,86 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>JoinRSO</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/dropDownMenu.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/formLayout.css" />
+
+    <style>
+        .button {
+            display: inline-block;
+            padding: 15px 20px;
+            font-size: 15px;
+            cursor: pointer;
+            text-align: center;
+            outline: none;
+            color: white;
+            background-color: grey;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .button:hover {
+                background-color: black;
+            }
+
+        .button:active {
+                background-color: red;
+                box-shadow: 0 5px #666;
+                transform: translateY(4px);
+            }
+
+        div.styling{
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="navbar">
+        <a href="~/Home/Home"> Home </a>
+        <a href="~/Home/JoinRSO">Join RSO</a>
+        <a href="~/Home/CreateEvent">Add Event</a>
+        <a href="~/Home/CreateRSO">Add RSO</a>
+        <a href="~/Home/CreateUniversity">Add University</a>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">
+                Select University
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="styling">
+        <div class="form-style-2-heading">Below are the Registered Student Organizations to join</div>
+        <div>
+            <dl>
+                <button class="button">Join RSO 1</button> 
+                <br />
+                <br />
+                <dd>here is the description for RSO 1. they have alot of informaton and alot of text to work with lets see how this goes!</dd>  
+            </dl>
+
+    </div>
+</body>
+</html>
