@@ -12,15 +12,21 @@ namespace DatabaseConnection
 {
     public class EventConnection : IEventConnection
     {
-        public List<Events> GetEvents()
+        public List<Events> GetEvents(int type)
         {
             List<Events> events = new List<Events>();
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnection"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                SqlParameter[] sqlParams = new SqlParameter[]
+                {
+                    new SqlParameter("@Type", type)
+                };
+
                 SqlCommand command = new SqlCommand();
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "GetEvents";
+                command.Parameters.AddRange(sqlParams);
                 command.Connection = connection;
 
                 try

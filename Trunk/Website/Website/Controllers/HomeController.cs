@@ -95,8 +95,10 @@ namespace Website.Controllers
             HomeModel model = new HomeModel();
             model.Events = new List<EventModel>();
             EventConnection eventConnection = new EventConnection();
-            List<Events> events = eventConnection.GetEvents();
+            List<Events> events = eventConnection.GetEvents(0);
             model.Events = ConvertEvents(events);
+            List<EventTypeResponse> eventTypes = eventConnection.GetEventTypes();
+            model.EventTypes = ConvertEventTypeResponse(eventTypes);
             return View(model);
         }
 
@@ -158,7 +160,7 @@ namespace Website.Controllers
             {
                 if (string.IsNullOrEmpty(comment))
                     return false;
-                
+
                 int userId = (int)Session["UserId"];
                 AddCommentRequest request = new AddCommentRequest()
                 {
@@ -172,7 +174,7 @@ namespace Website.Controllers
 
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -217,6 +219,7 @@ namespace Website.Controllers
             return Json(comments);
         }
 
+        [HttpPost]
         public ActionResult AddRso(CreateRsoModel model)
         {
             SaveRsoRequest request = PrepareSaveRsoRequest(model);
@@ -225,6 +228,7 @@ namespace Website.Controllers
             return RedirectToAction("Home");
         }
 
+        [HttpPost]
         public JsonResult JoinNewRso(int rsoId)
         {
             int userId = Convert.ToInt32(Session["UserId"]);
@@ -239,6 +243,17 @@ namespace Website.Controllers
             conn.JoinRso(rsoId, userId);
 
             return Json("Success! You've joined the RSO!");
+        }
+
+        [HttpPost]
+        public PartialViewResult FilterEvents(int eventType)
+        {
+            HomeModel model = new HomeModel();
+            model.Events = new List<EventModel>();
+            EventConnection eventConnection = new EventConnection();
+            List<Events> events = eventConnection.GetEvents(eventType);
+            model.Events = ConvertEvents(events);
+            return PartialView("_Events", model);
         }
 
         // Private conversion methods
@@ -273,6 +288,9 @@ namespace Website.Controllers
 
                 output.Add(m);
             }
+
+            output = output.OrderBy(m => m.Date).ToList();
+
             return output;
         }
 

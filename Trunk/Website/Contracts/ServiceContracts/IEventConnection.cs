@@ -8,7 +8,7 @@ namespace Contracts
 {
     public interface IEventConnection
     {
-        List<Events> GetEvents();
+        List<Events> GetEvents(int type);
 
         List<EventCategoryResponse> GetEventCategories();
 

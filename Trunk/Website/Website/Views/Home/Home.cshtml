@@ -163,23 +163,22 @@
     <div class="navbar">
         <a href="~/Home/Home"> Home </a>
         @if ((int)Session["UserType"] == 1)
-    {
-
-        <a href="~/Home/CreateEvent">Add Event</a>
-        <a href="~/Home/CreateRSO">Add RSO</a>
-        <a href="~/Home/CreateUniversity">Add University</a>
-}
-else if ((int)Session["UserType"] == 2)
-{
-    <a href="~/Home/JoinRSO">Join RSO</a>
-    <a href="~/Home/CreateEvent">Add Event</a>
-    <a href="~/Home/CreateUniversity">Add University</a>
-}
-else if ((int)Session["UserType"] == 3)
-{
-    <a href="~/Home/JoinRSO">Join RSO</a>
-    <a href="~/Home/CreateEvent">Add Event</a>
-}
+        {
+            <a href="~/Home/CreateEvent">Add Event</a>
+            <a href="~/Home/CreateRSO">Add RSO</a>
+            <a href="~/Home/CreateUniversity">Add University</a>
+        }
+        else if ((int)Session["UserType"] == 2)
+        {
+            <a href="~/Home/JoinRSO">Join RSO</a>
+            <a href="~/Home/CreateEvent">Add Event</a>
+            <a href="~/Home/CreateUniversity">Add University</a>
+        }
+        else if ((int)Session["UserType"] == 3)
+        {
+            <a href="~/Home/JoinRSO">Join RSO</a>
+            <a href="~/Home/CreateEvent">Add Event</a>
+        }
         <div class="dropdown">
             <button class="dropbtn" onclick="myFunction()">
                 Select University
@@ -197,67 +196,14 @@ else if ((int)Session["UserType"] == 3)
             <div class="row">
                 <div class="col-md-6">
                     <div class="media">
-                        <div class="media-body">
-
-                           @foreach (Website.Models.EventModel m in Model.Events)
-    {
-                        <a class="pull-left" href="#"><span class="dateEl"><em>@m.Date.Day</em>@m.Month</span></a>
-
-                        <h4 class="media-heading">
-                            <a href="#">@m.Name</a>
-                        </h4>
-                        <div class="meta-data">
-                            <span class="longDate">@m.Date.ToShortDateString()</span> <span class="timeEl">@m.Date.ToShortTimeString()</span>
-                        </div>
-                        <p>
-                            @m.Description
-                        </p>
-
-                        <!-- Add the UI for rating in the corresponding case -->
-                        <div>
-                            <fieldset class="score">
-                                <legend>Score:</legend>
-
-                                <input type="radio" id="score-5" name="score" value="5" />
-                                <label title="5 stars" for="score-5">5 stars</label>
-
-                                <input type="radio" id="score-4" name="score" value="4" />
-                                <label title="4 stars" for="score-4">4 stars</label>
-
-                                <input type="radio" id="score-3" name="score" value="3" />
-                                <label title="3 stars" for="score-3">3 stars</label>
-
-                                <input type="radio" id="score-2" name="score" value="2" />
-                                <label title="2 stars" for="score-2">2 stars</label>
-
-                                <input type="radio" id="score-1" name="score" value="1" />
-                                <label title="1 stars" for="score-1">1 stars</label>
-
-                                    </fieldset>
-
-                                </div>
-                                <div>
-                                    <button class="comment-button" data-eventid="@m.EventId">Add Comment</button>
-                                    <button class="view-comments" data-eventid="@m.EventId">View Comments</button>
-                                </div>
-                                <div>
-                                    <textarea id="CommentBox-@m.EventId" data-eventid="@m.EventId" style="display:none; margin-left:113px; margin-top:20px; width:400px; height:100px;"></textarea>
-                                    <button class="post-comment-button" id="PostComment-@m.EventId" data-eventid="@m.EventId" style="display:none; margin-left:113px; margin-top:20px;">Post Comment</button>
-                                </div>
-                                <br />
-                                <div id="commentsWrapper-@m.EventId" style="display:none;">
-                                    <h4 style="margin-left:113px; margin-bottom:10px;">Comments</h4>
-                                    <!-- Comments Below -->
-                                    <div id="comments-@m.EventId">
-
-                                    </div>
-                                    <button style="margin-left:113px; margin-bottom:10px;" class="collapse-comments" data-eventid="@m.EventId">Collapse Comments</button>
-                                </div>
-                            }
-
-
-
-                        </div><!-- / media-body -->
+                        <label><span><strong>@Html.LabelFor(m => m.EventTypes)</strong></span>
+                        <br />
+                        @Html.DropDownListFor(m => m.SelectedEventType, new SelectList(Model.EventTypes, "Id", "Name"), "All Events", new { @class = "select-field", @style = "margin-top: 10px;width: 300px;height: 30px;" })</label>
+                        <br />
+                        <br />
+                    <div class="media-body" id="eventsList">
+                        @{ Html.RenderPartial("_Events", Model); }
+                    </div><!-- / media-body -->
                     </div><!-- / media -->
                 </div>
             </div>
@@ -272,14 +218,14 @@ else if ((int)Session["UserType"] == 3)
         }
 
 
-        $('.comment-button').on('click', function () {
+        $(document).on('click', '.comment-button', function () {
             var commentBoxId = 'CommentBox-' + $(this).attr('data-eventid');
             var postCommentButtonId = 'PostComment-' + $(this).attr('data-eventid');
             document.getElementById(commentBoxId).style.display = "block";
             document.getElementById(postCommentButtonId).style.display = "block";
         })
 
-        $('.post-comment-button').on('click', function () {
+        $(document).on('click', '.post-comment-button', function () {
             var eventId = $(this).attr('data-eventid');
             var comment = $('#CommentBox-' + eventId).val();
 
@@ -302,7 +248,7 @@ else if ((int)Session["UserType"] == 3)
             })
         })
 
-        $('.view-comments').on('click', function () {
+        $(document).on('click', '.view-comments', 'click', function () {
             var eventId = $(this).attr('data-eventid');
             $.ajax({
                 type: "POST",
@@ -358,7 +304,7 @@ else if ((int)Session["UserType"] == 3)
             })
         })
 
-        $('.collapse-comments').on('click', function () {
+        $(document).on('click', '.collapse-comments', function () {
             var eventId = $(this).attr('data-eventid');
             var commentWrapperId = 'commentsWrapper-' + eventId;
             document.getElementById(commentWrapperId).style.display = "none";
@@ -407,6 +353,22 @@ else if ((int)Session["UserType"] == 3)
             })
         })
 
+
+        $('#SelectedEventType').on('change', function () {
+            var eventType = $(this).val();
+            if (eventType == "")
+                eventType = 0;
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("FilterEvents", "Home")',
+                data: {
+                    eventType: eventType
+                }
+            }).done(function (result) {
+                document.getElementById('eventsList').innerHTML = result;
+            })
+        })
     </script>        
     </body>
 </html>
