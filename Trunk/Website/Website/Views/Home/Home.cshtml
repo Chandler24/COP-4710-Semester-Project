@@ -167,17 +167,19 @@
             <a href="~/Home/CreateEvent">Add Event</a>
             <a href="~/Home/CreateRSO">Add RSO</a>
             <a href="~/Home/CreateUniversity">Add University</a>
+            <a href="~/Home/JoinRSO">Join RSO</a>
         }
         else if ((int)Session["UserType"] == 2)
         {
-            <a href="~/Home/JoinRSO">Join RSO</a>
+            <a href="~/Home/CreateRSO">Add RSO</a>
             <a href="~/Home/CreateEvent">Add Event</a>
-            <a href="~/Home/CreateUniversity">Add University</a>
+            <a href="~/Home/JoinRSO">Join RSO</a>
         }
         else if ((int)Session["UserType"] == 3)
         {
-            <a href="~/Home/JoinRSO">Join RSO</a>
+            <a href="~/Home/CreateRSO">Add RSO</a>
             <a href="~/Home/CreateEvent">Add Event</a>
+            <a href="~/Home/JoinRSO">Join RSO</a>
         }
         <div class="dropdown">
             <button class="dropbtn" onclick="myFunction()">
